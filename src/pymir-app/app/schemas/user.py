@@ -8,6 +8,7 @@ from app.schemas.common import (
     IdModelMixin,
     IsDeletedModelMixin,
 )
+from app.schemas.user_role import UserRole
 
 
 # Shared properties
@@ -30,6 +31,8 @@ class UserUpdate(UserBase):
 
 
 class UserInDBBase(IdModelMixin, DateTimeModelMixin, IsDeletedModelMixin, UserBase):
+    user_role: Optional[UserRole]
+
     class Config:
         orm_mode = True
 
