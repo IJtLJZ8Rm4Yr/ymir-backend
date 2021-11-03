@@ -1,8 +1,8 @@
-from typing import Optional
+from typing import List, Optional, Union
 
 from pydantic import BaseModel
 
-from app.schemas.common import IdModelMixin
+from app.schemas.common import Common, IdModelMixin
 
 
 class RoleBase(BaseModel):
@@ -29,3 +29,7 @@ class Role(RoleInDBBase):
 
 class RoleInDB(RoleInDBBase):
     pass
+
+
+class RoleOut(Common):
+    result: Union[Role, List[Role]]

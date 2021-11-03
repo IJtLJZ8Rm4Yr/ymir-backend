@@ -12,6 +12,7 @@ from .inference import InferenceCreate, InferenceOut
 from .keyword import KeywordOut
 from .model import Model, ModelCreate, ModelInput, ModelOut, Models, ModelUpdate
 from .msg import Msg
+from .role import Role, RoleOut
 from .runtime import Runtime, RuntimeCreate, RuntimeOut
 from .stats import Stats, StatsOut
 from .task import Task, TaskCreate, TaskOut, TaskParameter, Tasks, TaskUpdate
