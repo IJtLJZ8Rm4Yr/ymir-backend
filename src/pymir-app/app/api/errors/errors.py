@@ -184,6 +184,12 @@ class InvalidToken(APIError):
     message = "Invalid Token"
 
 
+class InvalidScope(APIError):
+    status_code = 401
+    code = error_codes.INVALID_SCOPE
+    message = "Invalid Scope"
+
+
 class InactiveUser(APIError):
     status_code = 401
     code = error_codes.USER_NOT_ACTIVE

@@ -1,6 +1,6 @@
 from typing import Any
 
-from fastapi import APIRouter, Body, Depends
+from fastapi import APIRouter, Body, Depends, Security
 from fastapi.logger import logger
 from pydantic.networks import EmailStr
 from sqlalchemy.orm import Session
@@ -12,6 +12,7 @@ from app.api.errors.errors import (
     FailedtoCreateWorkspace,
     UserNotFound,
 )
+from app.constants.role import Roles
 from app.utils.ymir_controller import (
     ControllerClient,
     ControllerRequest,
@@ -78,12 +79,15 @@ def get_current_user(
 @router.get(
     "/{user_id}",
     response_model=schemas.UserOut,
-    dependencies=[Depends(deps.get_current_active_admin)],
     responses={404: {"description": "User Not Found"}},
 )
 def get_user(
     user_id: int,
     db: Session = Depends(deps.get_db),
+    current_user: models.User = Security(
+        deps.get_current_active_user,
+        scopes=[Roles.ADMIN.name, Roles.SUPER_ADMIN.name],
+    ),
 ) -> Any:
     """
     Query user information,

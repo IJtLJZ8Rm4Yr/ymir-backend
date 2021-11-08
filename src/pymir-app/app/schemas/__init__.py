@@ -12,10 +12,11 @@ from .inference import InferenceCreate, InferenceOut
 from .keyword import KeywordOut
 from .model import Model, ModelCreate, ModelInput, ModelOut, Models, ModelUpdate
 from .msg import Msg
-from .role import Role, RoleOut
+from .role import Role, RoleCreate, RoleOut
 from .runtime import Runtime, RuntimeCreate, RuntimeOut
 from .stats import Stats, StatsOut
 from .task import Task, TaskCreate, TaskOut, TaskParameter, Tasks, TaskUpdate
 from .token import Token, TokenOut, TokenPayload
 from .user import User, UserCreate, UserInDB, UserOut, UserUpdate
+from .user_role import UserRole, UserRoleCreate
 from .workspace import Workspace, WorkspaceCreate, WorkspaceOut

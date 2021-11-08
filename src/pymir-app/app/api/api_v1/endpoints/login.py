@@ -14,6 +14,7 @@ from app.api.errors.errors import (
     UserNotFound,
 )
 from app.config import settings
+from app.constants.role import Roles
 from app.utils import security
 from app.utils.email import send_reset_password_email
 
@@ -42,10 +43,19 @@ def login_access_token(
         raise IncorrectEmailOrPassword()
     elif crud.user.is_deleted(user):
         raise InactiveUser()
+    user_role = crud.user_role.get_role_name_by_user_id(db, user_id=user.id)
+    if not user_role:
+        role = Roles.NORMAL.name
+    else:
+        role = user_role.role_name
     access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
+    token_payload = {
+        "id": user.id,
+        "role": role,
+    }
     payload = {
         "access_token": security.create_access_token(
-            user.id, expires_delta=access_token_expires
+            token_payload, expires_delta=access_token_expires
         ),
         "token_type": "bearer",
     }
