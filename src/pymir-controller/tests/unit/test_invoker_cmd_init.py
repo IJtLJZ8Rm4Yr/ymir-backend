@@ -69,7 +69,7 @@ class TestInvokerInit(unittest.TestCase):
                                          repo_id=self._mir_repo_name)
         print(MessageToDict(response))
 
-        expected_cmd = "cd {0} && mkdir {1} && cd {1} && mir init".format(self._user_root, self._mir_repo_name)
+        expected_cmd = f"cd {os.path.join(self._user_root, self._mir_repo_name)} && mir init"
         mock_run.assert_called_once_with(expected_cmd, capture_output=True, shell=True)
 
         expected_ret = mirsvrpb.GeneralResp()
