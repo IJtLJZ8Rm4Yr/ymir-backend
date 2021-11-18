@@ -14,7 +14,7 @@ from controller.utils.app_logger import logger
 from controller.utils.code import ResCode
 
 
-class LabelAddInvoker(BaseMirControllerInvoker):
+class LabelGetInvoker(BaseMirControllerInvoker):
     def pre_invoke(self) -> backend_pb2.GeneralResp:
         return checker.check_request(
             request=self._request,
@@ -25,7 +25,7 @@ class LabelAddInvoker(BaseMirControllerInvoker):
     def invoke(self) -> backend_pb2.GeneralResp:
 
         label_handler = labels.LabelFileHandler(self._user_root)
-        error_rows = label_handler.add_labels(self._request.private_labels)
+        error_rows = label_handler.get_all_labels(with_reserve=False)
         if error_rows:
             response = utils.make_general_response(ResCode.CTR_ERROR_UNKNOWN, "labels error")
             response.private_labels.extend(error_rows)

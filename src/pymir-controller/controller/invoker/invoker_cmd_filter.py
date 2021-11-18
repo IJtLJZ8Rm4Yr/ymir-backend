@@ -1,11 +1,11 @@
 from controller.invoker.invoker_cmd_base import BaseMirControllerInvoker
 from controller.utils import checker, code, revs, utils
 from ymir.ids import class_ids
-from ymir.protos import mir_controller_service_pb2 as mirsvrpb
+from proto import backend_pb2
 
 
 class FilterBranchInvoker(BaseMirControllerInvoker):
-    def pre_invoke(self) -> mirsvrpb.GeneralResp:
+    def pre_invoke(self) -> backend_pb2.GeneralResp:
         if not self._request.in_class_ids and not self._request.ex_class_ids:
             return utils.make_general_response(code.ResCode.CTR_INVALID_SERVICE_REQ,
                                                'one of include/exclude ids is required.')
@@ -20,8 +20,8 @@ class FilterBranchInvoker(BaseMirControllerInvoker):
                                      ],
                                      mir_root=self._repo_root)
 
-    def invoke(self) -> mirsvrpb.GeneralResp:
-        if self._request.req_type != mirsvrpb.CMD_FILTER:
+    def invoke(self) -> backend_pb2.GeneralResp:
+        if self._request.req_type != backend_pb2.CMD_FILTER:
             raise RuntimeError("Mismatched req_type")
 
         # invoke command

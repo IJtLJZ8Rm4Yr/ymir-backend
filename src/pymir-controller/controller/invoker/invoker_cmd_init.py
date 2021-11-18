@@ -3,11 +3,11 @@ import pathlib
 
 from controller.invoker.invoker_cmd_base import BaseMirControllerInvoker
 from controller.utils import checker, utils, labels
-from ymir.protos import mir_controller_service_pb2 as mirsvrpb
+from proto import backend_pb2
 
 
 class InitInvoker(BaseMirControllerInvoker):
-    def pre_invoke(self) -> mirsvrpb.GeneralResp:
+    def pre_invoke(self) -> backend_pb2.GeneralResp:
         return checker.check_request(request=self._request,
                                      prerequisites=[
                                          checker.Prerequisites.CHECK_USER_ID,
@@ -16,8 +16,8 @@ class InitInvoker(BaseMirControllerInvoker):
                                      ],
                                      mir_root=self._repo_root)
 
-    def invoke(self) -> mirsvrpb.GeneralResp:
-        if self._request.req_type not in [mirsvrpb.CMD_INIT, mirsvrpb.REPO_CREATE]:
+    def invoke(self) -> backend_pb2.GeneralResp:
+        if self._request.req_type not in [backend_pb2.CMD_INIT, backend_pb2.REPO_CREATE]:
             raise RuntimeError("Mismatched req_type")
 
         # os.makedirs(self._user_root, exist_ok=True)

@@ -6,7 +6,7 @@ from unittest import mock
 
 from google.protobuf.json_format import MessageToDict, ParseDict
 
-import ymir.protos.mir_controller_service_pb2 as mirsvrpb
+from proto import backend_pb2
 from controller.utils.invoker_call import make_invoker_cmd_call
 from controller.utils.invoker_mapping import RequestTypeToInvoker
 
@@ -70,9 +70,9 @@ class TestInvokerFilterBranch(unittest.TestCase):
     def test_invoker_00(self, mock_run):
         in_class_ids = [1, 2]
         ex_class_ids = [3]
-        response = make_invoker_cmd_call(invoker=RequestTypeToInvoker[mirsvrpb.CMD_FILTER],
+        response = make_invoker_cmd_call(invoker=RequestTypeToInvoker[backend_pb2.CMD_FILTER],
                                          sandbox_root=self._sandbox_root,
-                                         req_type=mirsvrpb.CMD_FILTER,
+                                         req_type=backend_pb2.CMD_FILTER,
                                          user_id=self._user_name,
                                          repo_id=self._mir_repo_name,
                                          task_id=self._task_id,
@@ -87,7 +87,7 @@ class TestInvokerFilterBranch(unittest.TestCase):
             self._mir_repo_root, self._task_id, self.in_dataset_ids[0], 'car;person', 'surfboard')
         mock_run.assert_called_once_with(expected_cmd, capture_output=True, shell=True)
 
-        expected_ret = mirsvrpb.GeneralResp()
+        expected_ret = backend_pb2.GeneralResp()
         expected_dict = {'message': RET_ID}
         ParseDict(expected_dict, expected_ret)
         self.assertEqual(response, expected_ret)

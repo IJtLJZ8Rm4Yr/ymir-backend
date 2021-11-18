@@ -7,8 +7,8 @@ from unittest import mock
 from google.protobuf.json_format import MessageToDict, ParseDict
 
 import tests.utils as test_utils
-import ymir.protos.mir_common_pb2 as mir_common
-import ymir.protos.mir_controller_service_pb2 as mirsvrpb
+from proto import backend_pb2
+from proto import backend_pb2
 
 from controller.utils import utils
 from controller.utils.invoker_call import make_invoker_cmd_call
@@ -73,17 +73,17 @@ class TestInvokerTaskFilter(unittest.TestCase):
 
     @mock.patch("subprocess.run", side_effect=_mock_run_func)
     def test_invoker_00(self, mock_run):
-        filter_request = mirsvrpb.TaskReqFilter()
+        filter_request = backend_pb2.TaskReqFilter()
         filter_request.in_dataset_ids[:] = [self._guest_id1, self._guest_id2]
         filter_request.in_class_ids[:] = [0, 1]
         filter_request.ex_class_ids[:] = [2]
-        req_create_task = mirsvrpb.ReqCreateTask()
-        req_create_task.task_type = mir_common.TaskTypeFilter
+        req_create_task = backend_pb2.ReqCreateTask()
+        req_create_task.task_type = backend_pb2.TaskTypeFilter
         req_create_task.no_task_monitor = True
         req_create_task.filter.CopyFrom(filter_request)
-        response = make_invoker_cmd_call(invoker=RequestTypeToInvoker[mirsvrpb.TASK_CREATE],
+        response = make_invoker_cmd_call(invoker=RequestTypeToInvoker[backend_pb2.TASK_CREATE],
                                          sandbox_root=self._sandbox_root,
-                                         req_type=mirsvrpb.TASK_CREATE,
+                                         req_type=backend_pb2.TASK_CREATE,
                                          user_id=self._user_name,
                                          repo_id=self._mir_repo_name,
                                          task_id=self._task_id,
@@ -101,7 +101,7 @@ class TestInvokerTaskFilter(unittest.TestCase):
             mock.call(expected_cmd_filter, capture_output=True, shell=True),
         ])
 
-        expected_ret = mirsvrpb.GeneralResp()
+        expected_ret = backend_pb2.GeneralResp()
         expected_dict = {'message': RET_ID}
         ParseDict(expected_dict, expected_ret)
         self.assertEqual(response, expected_ret)

@@ -35,7 +35,7 @@ class LabelFileHandler:
         for one_row in waited_labels:
             for one_name in one_row[1:]:
                 if self._check_name_existed(one_row[0], one_name, middle_content):
-                    error_rows.append(one_row)
+                    error_rows.append(','.join(one_row))
 
         return error_rows
 
