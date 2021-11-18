@@ -5,7 +5,7 @@ import sys
 from typing import List
 
 from controller.utils import code, utils
-from ymir.ids import task_id as task_id_proto
+from controller.utils import task_id as task_id_proto
 from proto import backend_pb2
 
 

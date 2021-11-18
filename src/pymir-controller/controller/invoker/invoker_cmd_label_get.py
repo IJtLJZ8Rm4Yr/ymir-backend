@@ -23,9 +23,8 @@ class LabelGetInvoker(BaseMirControllerInvoker):
         )
 
     def invoke(self) -> backend_pb2.GeneralResp:
-
         label_handler = labels.LabelFileHandler(self._user_root)
-        error_rows = label_handler.get_all_labels(with_reserve=False)
+        error_rows = label_handler.get_all_labels(with_reserve=False, csv_string=True)
         if error_rows:
             response = utils.make_general_response(ResCode.CTR_ERROR_UNKNOWN, "labels error")
             response.private_labels.extend(error_rows)

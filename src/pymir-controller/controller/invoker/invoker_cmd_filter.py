@@ -1,6 +1,5 @@
 from controller.invoker.invoker_cmd_base import BaseMirControllerInvoker
-from controller.utils import checker, code, revs, utils
-from ymir.ids import class_ids
+from controller.utils import checker, code, revs, utils, labels
 from proto import backend_pb2
 
 
@@ -30,13 +29,13 @@ class FilterBranchInvoker(BaseMirControllerInvoker):
             revs.join_tvt_branch_tid(branch_id=self._request.dst_task_id, tid=self._task_id),
             revs.join_tvt_branch_tid(branch_id=self._request.in_dataset_ids[0], tid=self._request.his_task_id))
 
-        ids_manager = class_ids.ClassIdManager()
+        label_handler = labels.LabelFileHandler(self._user_root)
         if self._request.in_class_ids:
-            filter_command += " -p '{}'".format(';'.join(
-                [ids_manager.main_name_for_id(x) for x in self._request.in_class_ids]))
+            filter_command += " -p '{}'".format(';'.join(label_handler.get_main_labels_by_ids(self._request.in_class_ids)
+                ))
         if self._request.ex_class_ids:
-            filter_command += " -P '{}'".format(';'.join(
-                [ids_manager.main_name_for_id(x) for x in self._request.ex_class_ids]))
+            filter_command += " -P '{}'".format(';'.join(label_handler.get_main_labels_by_ids(self._request.ex_class_ids)
+                ))
         return utils.run_command(filter_command)
 
     def _repr(self) -> str:

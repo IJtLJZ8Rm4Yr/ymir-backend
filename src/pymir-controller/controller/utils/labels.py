@@ -35,7 +35,7 @@ class LabelFileHandler:
         for one_row in waited_labels:
             for one_name in one_row[1:]:
                 if self._check_name_existed(one_row[0], one_name, middle_content):
-                    error_rows.append(','.join(one_row))
+                    error_rows.append(",".join(one_row))
 
         return error_rows
 
@@ -77,13 +77,15 @@ class LabelFileHandler:
         writable_content = self.format_to_writable_content(middle_content)
         self._write_label_file(writable_content)
 
-    def get_all_labels(self, with_reserve=True):
+    def get_all_labels(self, with_reserve=True, csv_string=False):
         all_labels = []
         with open(self.label_file) as f:
             reader = csv.reader(f)
             for one_row in reader:
                 if not with_reserve:
                     one_row.pop(1)
+                if csv_string:
+                    one_row = ",".join(one_row)
                 all_labels.append(one_row)
 
         return all_labels

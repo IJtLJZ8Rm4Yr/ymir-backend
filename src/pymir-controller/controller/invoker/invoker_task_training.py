@@ -3,13 +3,12 @@ import time
 from typing import List, Dict, Set
 
 import yaml
-from ymir.ids import class_ids
 from proto import backend_pb2
 
 from controller.config import GPU_LOCKING_SET
 from controller.invoker.invoker_cmd_merge import MergeInvoker
 from controller.invoker.invoker_task_base import TaskBaseInvoker
-from controller.utils import code, utils, invoker_call, revs, gpu_utils
+from controller.utils import code, utils, invoker_call, revs, gpu_utils, labels
 from controller.utils.redis import rds
 
 
@@ -52,10 +51,10 @@ class TaskTrainingInvoker(TaskBaseInvoker):
         return ",".join(gpus)
 
     @classmethod
-    def gen_training_config(cls, req_training_config: str, in_class_ids: List, work_dir: str) -> str:
+    def gen_training_config(cls, repo_root: str, req_training_config: str, in_class_ids: List, work_dir: str) -> str:
         training_config = yaml.safe_load(req_training_config)
-        ids_manager = class_ids.ClassIdManager()
-        training_config["class_names"] = [ids_manager.main_name_for_id(x) for x in in_class_ids]
+        label_handler = labels.LabelFileHandler(repo_root)
+        training_config["class_names"] = label_handler.get_main_labels_by_ids(in_class_ids)
 
         gpu_ids = cls.find_gpu_ids(training_config)
         if not gpu_ids:
@@ -106,7 +105,7 @@ class TaskTrainingInvoker(TaskBaseInvoker):
         models_upload_location = assets_config["modelsuploadlocation"]
         media_location = assets_config["assetskvlocation"]
         training_image = assets_config["training_image"]
-        config_file = cls.gen_training_config(train_request.training_config, train_request.in_class_ids, working_dir)
+        config_file = cls.gen_training_config(repo_root, train_request.training_config, train_request.in_class_ids, working_dir)
         if not config_file:
             return utils.make_general_response(code.ResCode.CTR_ERROR_UNKNOWN, "Not enough GPU available")
 

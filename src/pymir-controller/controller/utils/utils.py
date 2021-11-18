@@ -3,7 +3,7 @@ import re
 import subprocess
 from typing import Tuple
 
-from ymir.ids import task_id as task_id_proto
+from controller.utils import task_id as task_id_proto
 from proto import backend_pb2
 
 from controller.utils.code import ResCode
