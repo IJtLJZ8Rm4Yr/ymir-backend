@@ -22,19 +22,18 @@ class LabelGetInvoker(BaseMirControllerInvoker):
             mir_root=self._repo_root,
         )
 
-    def invoke(self) -> backend_pb2.GeneralResp:
-        label_handler = labels.LabelFileHandler(self._user_root)
-        error_rows = label_handler.get_all_labels(with_reserve=False, csv_string=True)
-        if error_rows:
-            response = utils.make_general_response(ResCode.CTR_ERROR_UNKNOWN, "labels error")
-            response.private_labels.extend(error_rows)
+    def generate_response(self, all_labels) -> backend_pb2.GeneralResp:
+        response = utils.make_general_response(code.ResCode.CTR_OK, "")
+        response.csv_labels.extend(all_labels)
 
-            return response
-        else:
-            return utils.make_general_response(code.ResCode.CTR_OK, "")
+        return response
+
+    def invoke(self) -> backend_pb2.GeneralResp:
+        print("in get-------------------------------")
+        label_handler = labels.LabelFileHandler(self._user_root)
+        all_labels = label_handler.get_all_labels(with_reserve=False, csv_string=True)
+
+        return self.generate_response(all_labels)
 
     def _repr(self) -> str:
-        return (
-            f"cmd_labels_add: user: {self._request.user_id}, task_id: {self._task_id} "
-            f"private_labels: {self._request.private_labels}"
-        )
+        return f"cmd_labels_add: user: {self._request.user_id}, task_id: {self._task_id} "

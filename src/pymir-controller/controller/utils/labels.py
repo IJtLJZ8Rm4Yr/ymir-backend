@@ -22,13 +22,14 @@ class LabelFileHandler:
             writer.writerows(content)
 
     def _check_name_existed(self, req_main_label, one_name, middle_content: Dict):
+        print(f'_check_name_existed {req_main_label} {one_name} {middle_content}')
         for main_label, one_label_content in middle_content.items():
             if req_main_label == main_label:
                 continue
             if one_name in one_label_content["labels"]:
-                return False
+                return True
 
-        return True
+        return False
 
     def compare_waited_labels(self, middle_content, waited_labels):
         error_rows = []
@@ -42,7 +43,7 @@ class LabelFileHandler:
     def format_to_writable_content(self, middle_content):
         writable_content = [0] * len(middle_content)
         for _, one_label_content in middle_content.items():
-            writable_content[one_label_content["line"]] = one_label_content["line"] + [""] + one_label_content["labels"]
+            writable_content[one_label_content["line"]] = [one_label_content["line"]] + [""] + one_label_content["labels"]
 
         return writable_content
 
@@ -68,9 +69,13 @@ class LabelFileHandler:
 
     def add_labels(self, waited_labels):
         waited_labels_list = self.format_waited_labels(waited_labels)
+        print(f'waited_labels_list: {waited_labels_list}')
         existed_labels = self.get_all_labels()
+        print(existed_labels)
         middle_content = self.gen_middle_content(existed_labels, waited_labels_list)
+        print(middle_content)
         error_rows = self.compare_waited_labels(middle_content, waited_labels_list)
+        print(f'error: {error_rows}')
         if error_rows:
             return error_rows
 

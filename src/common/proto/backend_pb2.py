@@ -16,16 +16,16 @@ _sym_db = _symbol_database.Default()
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='backend.proto',
-  package='ymir.backend',
+  package='ymir.controller',
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\rbackend.proto\x12\x0cymir.backend\"\xf5\x03\n\nGeneralReq\x12\x0f\n\x07user_id\x18\x01 \x01(\t\x12\x0f\n\x07repo_id\x18\x02 \x01(\t\x12+\n\x08req_type\x18\x03 \x01(\x0e\x32\x19.ymir.backend.RequestType\x12\x0f\n\x07task_id\x18\x04 \x01(\t\x12\x14\n\x0csingleton_op\x18\x05 \x01(\t\x12\x13\n\x0bhis_task_id\x18\x06 \x01(\t\x12\x13\n\x0b\x64st_task_id\x18\x07 \x01(\t\x12\x16\n\x0ein_dataset_ids\x18\x08 \x03(\t\x12\x16\n\x0e\x65x_dataset_ids\x18\t \x03(\t\x12\x14\n\x0cin_class_ids\x18\n \x03(\x05\x12\x14\n\x0c\x65x_class_ids\x18\x0b \x03(\x05\x12\r\n\x05\x66orce\x18\x0c \x01(\x08\x12\x16\n\x0e\x63ommit_message\x18\r \x01(\t\x12\x12\n\nmodel_hash\x18\x0e \x01(\t\x12\x11\n\tasset_dir\x18\x0f \x01(\t\x12\x14\n\x0cmodel_config\x18\x10 \x01(\t\x12\x16\n\x0eprivate_labels\x18\x11 \x03(\t\x12\x35\n\x0freq_create_task\x18\xe9\x07 \x01(\x0b\x32\x1b.ymir.backend.ReqCreateTask\x12\x38\n\x11req_get_task_info\x18\xea\x07 \x01(\x0b\x32\x1c.ymir.backend.ReqGetTaskInfo\"\xd7\x01\n\x0bGeneralResp\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x05\x12\x13\n\x0breq_task_id\x18\x02 \x01(\t\x12\x0f\n\x07message\x18\x03 \x01(\t\x12\x10\n\x08\x65xt_strs\x18\x04 \x03(\t\x12\x12\n\ncsv_labels\x18\x05 \x03(\t\x12:\n\x12resp_get_task_info\x18\xe8\x07 \x01(\x0b\x32\x1d.ymir.backend.RespGetTaskInfo\x12\x32\n\tdetection\x18\xe9\x07 \x01(\x0b\x32\x1e.ymir.backend.RespCMDInference\"\xec\x03\n\rReqCreateTask\x12)\n\ttask_type\x18\x01 \x01(\x0e\x32\x16.ymir.backend.TaskType\x12\x15\n\rsampling_rate\x18\x02 \x01(\x02\x12\x17\n\x0fno_task_monitor\x18\x03 \x01(\x08\x12+\n\x06\x66ilter\x18\x65 \x01(\x0b\x32\x1b.ymir.backend.TaskReqFilter\x12/\n\x08training\x18\x66 \x01(\x0b\x32\x1d.ymir.backend.TaskReqTraining\x12+\n\x06mining\x18g \x01(\x0b\x32\x1b.ymir.backend.TaskReqMining\x12\x31\n\timporting\x18h \x01(\x0b\x32\x1e.ymir.backend.TaskReqImporting\x12\x31\n\texporting\x18i \x01(\x0b\x32\x1e.ymir.backend.TaskReqExporting\x12\x31\n\tinference\x18j \x01(\x0b\x32\x1e.ymir.backend.TaskReqInference\x12+\n\x04\x63opy\x18k \x01(\x0b\x32\x1d.ymir.backend.TaskReqCopyData\x12/\n\x08labeling\x18l \x01(\x0b\x32\x1d.ymir.backend.TaskReqLabeling\"S\n\rTaskReqFilter\x12\x16\n\x0ein_dataset_ids\x18\x01 \x03(\t\x12\x14\n\x0cin_class_ids\x18\x02 \x03(\x05\x12\x14\n\x0c\x65x_class_ids\x18\x03 \x03(\x05\"\xe5\x01\n\x0fTaskReqTraining\x12K\n\x10in_dataset_types\x18\x01 \x03(\x0b\x32\x31.ymir.backend.TaskReqTraining.TrainingDatasetType\x12\x14\n\x0cin_class_ids\x18\x02 \x03(\x05\x12\x17\n\x0ftraining_config\x18\x03 \x01(\t\x1aV\n\x13TrainingDatasetType\x12\x12\n\ndataset_id\x18\x01 \x01(\t\x12+\n\x0c\x64\x61taset_type\x18\x02 \x01(\x0e\x32\x15.ymir.backend.TvtType\"y\n\rTaskReqMining\x12\x16\n\x0ein_dataset_ids\x18\x01 \x03(\t\x12\x16\n\x0e\x65x_dataset_ids\x18\x02 \x03(\t\x12\x12\n\nmodel_hash\x18\x03 \x01(\t\x12\r\n\x05top_k\x18\x04 \x01(\x05\x12\x15\n\rmining_config\x18\x05 \x01(\t\"=\n\x10TaskReqImporting\x12\x11\n\tasset_dir\x18\x01 \x01(\t\x12\x16\n\x0e\x61nnotation_dir\x18\x02 \x01(\t\"|\n\x10TaskReqExporting\x12\x12\n\ndataset_id\x18\x01 \x01(\t\x12)\n\x06\x66ormat\x18\x02 \x01(\x0e\x32\x19.ymir.backend.LabelFormat\x12\x11\n\tasset_dir\x18\x03 \x01(\t\x12\x16\n\x0e\x61nnotation_dir\x18\x04 \x01(\t\"\x12\n\x10TaskReqInference\"S\n\x0fTaskReqCopyData\x12\x13\n\x0bsrc_user_id\x18\x01 \x01(\t\x12\x13\n\x0bsrc_repo_id\x18\x02 \x01(\t\x12\x16\n\x0esrc_dataset_id\x18\x03 \x01(\t\"\x8b\x01\n\x0fTaskReqLabeling\x12\x12\n\ndataset_id\x18\x01 \x01(\t\x12\x18\n\x10labeler_accounts\x18\x02 \x03(\t\x12\x14\n\x0cin_class_ids\x18\x03 \x03(\x05\x12\x1e\n\x16\x65xpert_instruction_url\x18\x04 \x01(\t\x12\x14\n\x0cproject_name\x18\x05 \x01(\t\"\"\n\x0eReqGetTaskInfo\x12\x10\n\x08task_ids\x18\x01 \x03(\t\"\xa1\x01\n\x0fRespGetTaskInfo\x12@\n\ntask_infos\x18\x01 \x03(\x0b\x32,.ymir.backend.RespGetTaskInfo.TaskInfosEntry\x1aL\n\x0eTaskInfosEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12)\n\x05value\x18\x02 \x01(\x0b\x32\x1a.ymir.backend.TaskInfoItem:\x02\x38\x01\"\x97\x02\n\x0cTaskInfoItem\x12\x0f\n\x07task_id\x18\x01 \x01(\t\x12\x14\n\x0c\x62\x61se_task_id\x18\x02 \x01(\t\x12\x0f\n\x07user_id\x18\x03 \x01(\t\x12\x0f\n\x07repo_id\x18\x04 \x01(\t\x12$\n\x04type\x18\x05 \x01(\x0e\x32\x16.ymir.backend.TaskType\x12&\n\x05state\x18\x06 \x01(\x0e\x32\x17.ymir.backend.TaskState\x12\x17\n\x0fstart_timestamp\x18\x07 \x01(\x03\x12\x18\n\x10\x66inish_timestamp\x18\x08 \x01(\x03\x12\x18\n\x10update_timestamp\x18\t \x01(\x03\x12\x0f\n\x07percent\x18\n \x01(\x02\x12\x12\n\nlast_error\x18\x0b \x01(\t\"\xc2\x01\n\x10RespCMDInference\x12O\n\x11image_annotations\x18\x01 \x03(\x0b\x32\x34.ymir.backend.RespCMDInference.ImageAnnotationsEntry\x1a]\n\x15ImageAnnotationsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x33\n\x05value\x18\x02 \x01(\x0b\x32$.ymir.backend.SingleImageAnnotations:\x02\x38\x01\"G\n\x16SingleImageAnnotations\x12-\n\x0b\x61nnotations\x18\x02 \x03(\x0b\x32\x18.ymir.backend.Annotation\"q\n\nAnnotation\x12\r\n\x05index\x18\x01 \x01(\x05\x12\x1f\n\x03\x62ox\x18\x02 \x01(\x0b\x32\x12.ymir.backend.Rect\x12\x10\n\x08\x63lass_id\x18\x03 \x01(\x05\x12\r\n\x05score\x18\x04 \x01(\x01\x12\x12\n\nclass_name\x18\x05 \x01(\t\"2\n\x04Rect\x12\t\n\x01x\x18\x01 \x01(\x05\x12\t\n\x01y\x18\x02 \x01(\x05\x12\t\n\x01w\x18\x03 \x01(\x05\x12\t\n\x01h\x18\x04 \x01(\x05\"\xa4\x01\n\x12TaskMonitorStorage\x12:\n\x05tasks\x18\x01 \x03(\x0b\x32+.ymir.backend.TaskMonitorStorage.TasksEntry\x1aR\n\nTasksEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x33\n\x05value\x18\x02 \x01(\x0b\x32$.ymir.backend.TaskMonitorStorageItem:\x02\x38\x01\"\xd3\x01\n\x16TaskMonitorStorageItem\x12\x30\n\x0cgeneral_info\x18\x01 \x01(\x0b\x32\x1a.ymir.backend.TaskInfoItem\x12\x19\n\x11monitor_file_path\x18\x02 \x01(\t\x12\x19\n\x11storage_file_path\x18\x03 \x01(\t\x12\x11\n\trepo_root\x18\x04 \x01(\t\x12\x13\n\x0b\x62ranch_name\x18\x05 \x01(\t\x12)\n\x07request\x18\x64 \x01(\x0b\x32\x18.ymir.backend.GeneralReq*Z\n\x07TvtType\x12\x12\n\x0eTvtTypeUnknown\x10\x00\x12\x13\n\x0fTvtTypeTraining\x10\x01\x12\x15\n\x11TvtTypeValidation\x10\x02\x12\x0f\n\x0bTvtTypeTest\x10\x03*\xc9\x01\n\x08TaskType\x12\x13\n\x0fTaskTypeUnknown\x10\x00\x12\x14\n\x10TaskTypeTraining\x10\x01\x12\x12\n\x0eTaskTypeMining\x10\x02\x12\x11\n\rTaskTypeLabel\x10\x03\x12\x12\n\x0eTaskTypeFilter\x10\x04\x12\x16\n\x12TaskTypeImportData\x10\x05\x12\x16\n\x12TaskTypeExportData\x10\x06\x12\x14\n\x10TaskTypeCopyData\x10\x07\x12\x11\n\rTaskTypeMerge\x10\x08*\x87\x01\n\tTaskState\x12\x14\n\x10TaskStateUnknown\x10\x00\x12\x14\n\x10TaskStatePending\x10\x01\x12\x14\n\x10TaskStateRunning\x10\x02\x12\x11\n\rTaskStateDone\x10\x03\x12\x12\n\x0eTaskStateError\x10\x04\x12\x11\n\rTaskStateMiss\x10\x05*\xeb\x01\n\x05RCode\x12\t\n\x05RC_OK\x10\x00\x12\x14\n\x10RC_ERROR_UNKNOWN\x10\x01\x12\x1d\n\x18RC_SERVICE_ERROR_UNKNOWN\x10\xe8\x07\x12\x1b\n\x16RC_SERVICE_INVALID_REQ\x10\xe9\x07\x12\x1c\n\x17RC_SERVICE_INVOKE_ERROR\x10\xea\x07\x12\x1f\n\x1aRC_SERVICE_UNKOWN_RESPONSE\x10\xeb\x07\x12\"\n\x1dRC_SERVICE_TASK_INVOKER_ERROR\x10\xec\x07\x12\"\n\x1dRC_SERVICE_INFO_INVOKER_ERROR\x10\xed\x07*<\n\x0bLabelFormat\x12\x11\n\rNO_ANNOTATION\x10\x00\x12\x0e\n\nPASCAL_VOC\x10\x01\x12\n\n\x06IF_ARK\x10\x02*U\n\nMirStorage\x12\x11\n\rMIR_METADATAS\x10\x00\x12\x13\n\x0fMIR_ANNOTATIONS\x10\x01\x12\x10\n\x0cMIR_KEYWORDS\x10\x02\x12\r\n\tMIR_TASKS\x10\x03*\x89\x03\n\x0bRequestType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x12\n\x0e\x43MD_BRANCH_DEL\x10\x01\x12\x13\n\x0f\x43MD_BRANCH_LIST\x10\x02\x12\x17\n\x13\x43MD_BRANCH_CHECKOUT\x10\x03\x12\x15\n\x11\x43MD_BRANCH_CREATE\x10\x04\x12\r\n\tCMD_CLONE\x10\x05\x12\x0e\n\nCMD_COMMIT\x10\x06\x12\x0e\n\nCMD_FILTER\x10\x07\x12\x0c\n\x08\x43MD_INIT\x10\x08\x12\x0b\n\x07\x43MD_LOG\x10\t\x12\r\n\tCMD_MERGE\x10\n\x12\x11\n\rCMD_INFERENCE\x10\x0b\x12\x11\n\rCMD_LABEL_ADD\x10\x0c\x12\x11\n\rCMD_LABEL_GET\x10\r\x12\r\n\tUSER_LIST\x10\x65\x12\x0f\n\x0bUSER_CREATE\x10\x66\x12\x0f\n\x0bUSER_REMOVE\x10g\x12\r\n\tREPO_LIST\x10h\x12\x0f\n\x0bREPO_CREATE\x10i\x12\x0f\n\x0bREPO_REMOVE\x10j\x12\x10\n\x0bTASK_CREATE\x10\xe9\x07\x12\x0e\n\tTASK_INFO\x10\xea\x07\x32\x66\n\x16mir_controller_service\x12L\n\x13\x64\x61ta_manage_request\x12\x18.ymir.backend.GeneralReq\x1a\x19.ymir.backend.GeneralResp\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\rbackend.proto\x12\x0fymir.controller\"\xfe\x03\n\nGeneralReq\x12\x0f\n\x07user_id\x18\x01 \x01(\t\x12\x0f\n\x07repo_id\x18\x02 \x01(\t\x12.\n\x08req_type\x18\x03 \x01(\x0e\x32\x1c.ymir.controller.RequestType\x12\x0f\n\x07task_id\x18\x04 \x01(\t\x12\x14\n\x0csingleton_op\x18\x05 \x01(\t\x12\x13\n\x0bhis_task_id\x18\x06 \x01(\t\x12\x13\n\x0b\x64st_task_id\x18\x07 \x01(\t\x12\x16\n\x0ein_dataset_ids\x18\x08 \x03(\t\x12\x16\n\x0e\x65x_dataset_ids\x18\t \x03(\t\x12\x14\n\x0cin_class_ids\x18\n \x03(\x05\x12\x14\n\x0c\x65x_class_ids\x18\x0b \x03(\x05\x12\r\n\x05\x66orce\x18\x0c \x01(\x08\x12\x16\n\x0e\x63ommit_message\x18\r \x01(\t\x12\x12\n\nmodel_hash\x18\x0e \x01(\t\x12\x11\n\tasset_dir\x18\x0f \x01(\t\x12\x14\n\x0cmodel_config\x18\x10 \x01(\t\x12\x16\n\x0eprivate_labels\x18\x11 \x03(\t\x12\x38\n\x0freq_create_task\x18\xe9\x07 \x01(\x0b\x32\x1e.ymir.controller.ReqCreateTask\x12;\n\x11req_get_task_info\x18\xea\x07 \x01(\x0b\x32\x1f.ymir.controller.ReqGetTaskInfo\"\xdd\x01\n\x0bGeneralResp\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x05\x12\x13\n\x0breq_task_id\x18\x02 \x01(\t\x12\x0f\n\x07message\x18\x03 \x01(\t\x12\x10\n\x08\x65xt_strs\x18\x04 \x03(\t\x12\x12\n\ncsv_labels\x18\x05 \x03(\t\x12=\n\x12resp_get_task_info\x18\xe8\x07 \x01(\x0b\x32 .ymir.controller.RespGetTaskInfo\x12\x35\n\tdetection\x18\xe9\x07 \x01(\x0b\x32!.ymir.controller.RespCMDInference\"\x87\x04\n\rReqCreateTask\x12,\n\ttask_type\x18\x01 \x01(\x0e\x32\x19.ymir.controller.TaskType\x12\x15\n\rsampling_rate\x18\x02 \x01(\x02\x12\x17\n\x0fno_task_monitor\x18\x03 \x01(\x08\x12.\n\x06\x66ilter\x18\x65 \x01(\x0b\x32\x1e.ymir.controller.TaskReqFilter\x12\x32\n\x08training\x18\x66 \x01(\x0b\x32 .ymir.controller.TaskReqTraining\x12.\n\x06mining\x18g \x01(\x0b\x32\x1e.ymir.controller.TaskReqMining\x12\x34\n\timporting\x18h \x01(\x0b\x32!.ymir.controller.TaskReqImporting\x12\x34\n\texporting\x18i \x01(\x0b\x32!.ymir.controller.TaskReqExporting\x12\x34\n\tinference\x18j \x01(\x0b\x32!.ymir.controller.TaskReqInference\x12.\n\x04\x63opy\x18k \x01(\x0b\x32 .ymir.controller.TaskReqCopyData\x12\x32\n\x08labeling\x18l \x01(\x0b\x32 .ymir.controller.TaskReqLabeling\"S\n\rTaskReqFilter\x12\x16\n\x0ein_dataset_ids\x18\x01 \x03(\t\x12\x14\n\x0cin_class_ids\x18\x02 \x03(\x05\x12\x14\n\x0c\x65x_class_ids\x18\x03 \x03(\x05\"\xeb\x01\n\x0fTaskReqTraining\x12N\n\x10in_dataset_types\x18\x01 \x03(\x0b\x32\x34.ymir.controller.TaskReqTraining.TrainingDatasetType\x12\x14\n\x0cin_class_ids\x18\x02 \x03(\x05\x12\x17\n\x0ftraining_config\x18\x03 \x01(\t\x1aY\n\x13TrainingDatasetType\x12\x12\n\ndataset_id\x18\x01 \x01(\t\x12.\n\x0c\x64\x61taset_type\x18\x02 \x01(\x0e\x32\x18.ymir.controller.TvtType\"y\n\rTaskReqMining\x12\x16\n\x0ein_dataset_ids\x18\x01 \x03(\t\x12\x16\n\x0e\x65x_dataset_ids\x18\x02 \x03(\t\x12\x12\n\nmodel_hash\x18\x03 \x01(\t\x12\r\n\x05top_k\x18\x04 \x01(\x05\x12\x15\n\rmining_config\x18\x05 \x01(\t\"=\n\x10TaskReqImporting\x12\x11\n\tasset_dir\x18\x01 \x01(\t\x12\x16\n\x0e\x61nnotation_dir\x18\x02 \x01(\t\"\x7f\n\x10TaskReqExporting\x12\x12\n\ndataset_id\x18\x01 \x01(\t\x12,\n\x06\x66ormat\x18\x02 \x01(\x0e\x32\x1c.ymir.controller.LabelFormat\x12\x11\n\tasset_dir\x18\x03 \x01(\t\x12\x16\n\x0e\x61nnotation_dir\x18\x04 \x01(\t\"\x12\n\x10TaskReqInference\"S\n\x0fTaskReqCopyData\x12\x13\n\x0bsrc_user_id\x18\x01 \x01(\t\x12\x13\n\x0bsrc_repo_id\x18\x02 \x01(\t\x12\x16\n\x0esrc_dataset_id\x18\x03 \x01(\t\"\x8b\x01\n\x0fTaskReqLabeling\x12\x12\n\ndataset_id\x18\x01 \x01(\t\x12\x18\n\x10labeler_accounts\x18\x02 \x03(\t\x12\x14\n\x0cin_class_ids\x18\x03 \x03(\x05\x12\x1e\n\x16\x65xpert_instruction_url\x18\x04 \x01(\t\x12\x14\n\x0cproject_name\x18\x05 \x01(\t\"\"\n\x0eReqGetTaskInfo\x12\x10\n\x08task_ids\x18\x01 \x03(\t\"\xa7\x01\n\x0fRespGetTaskInfo\x12\x43\n\ntask_infos\x18\x01 \x03(\x0b\x32/.ymir.controller.RespGetTaskInfo.TaskInfosEntry\x1aO\n\x0eTaskInfosEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12,\n\x05value\x18\x02 \x01(\x0b\x32\x1d.ymir.controller.TaskInfoItem:\x02\x38\x01\"\x9d\x02\n\x0cTaskInfoItem\x12\x0f\n\x07task_id\x18\x01 \x01(\t\x12\x14\n\x0c\x62\x61se_task_id\x18\x02 \x01(\t\x12\x0f\n\x07user_id\x18\x03 \x01(\t\x12\x0f\n\x07repo_id\x18\x04 \x01(\t\x12\'\n\x04type\x18\x05 \x01(\x0e\x32\x19.ymir.controller.TaskType\x12)\n\x05state\x18\x06 \x01(\x0e\x32\x1a.ymir.controller.TaskState\x12\x17\n\x0fstart_timestamp\x18\x07 \x01(\x03\x12\x18\n\x10\x66inish_timestamp\x18\x08 \x01(\x03\x12\x18\n\x10update_timestamp\x18\t \x01(\x03\x12\x0f\n\x07percent\x18\n \x01(\x02\x12\x12\n\nlast_error\x18\x0b \x01(\t\"\xc8\x01\n\x10RespCMDInference\x12R\n\x11image_annotations\x18\x01 \x03(\x0b\x32\x37.ymir.controller.RespCMDInference.ImageAnnotationsEntry\x1a`\n\x15ImageAnnotationsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x36\n\x05value\x18\x02 \x01(\x0b\x32\'.ymir.controller.SingleImageAnnotations:\x02\x38\x01\"J\n\x16SingleImageAnnotations\x12\x30\n\x0b\x61nnotations\x18\x02 \x03(\x0b\x32\x1b.ymir.controller.Annotation\"t\n\nAnnotation\x12\r\n\x05index\x18\x01 \x01(\x05\x12\"\n\x03\x62ox\x18\x02 \x01(\x0b\x32\x15.ymir.controller.Rect\x12\x10\n\x08\x63lass_id\x18\x03 \x01(\x05\x12\r\n\x05score\x18\x04 \x01(\x01\x12\x12\n\nclass_name\x18\x05 \x01(\t\"2\n\x04Rect\x12\t\n\x01x\x18\x01 \x01(\x05\x12\t\n\x01y\x18\x02 \x01(\x05\x12\t\n\x01w\x18\x03 \x01(\x05\x12\t\n\x01h\x18\x04 \x01(\x05\"\xaa\x01\n\x12TaskMonitorStorage\x12=\n\x05tasks\x18\x01 \x03(\x0b\x32..ymir.controller.TaskMonitorStorage.TasksEntry\x1aU\n\nTasksEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x36\n\x05value\x18\x02 \x01(\x0b\x32\'.ymir.controller.TaskMonitorStorageItem:\x02\x38\x01\"\xd9\x01\n\x16TaskMonitorStorageItem\x12\x33\n\x0cgeneral_info\x18\x01 \x01(\x0b\x32\x1d.ymir.controller.TaskInfoItem\x12\x19\n\x11monitor_file_path\x18\x02 \x01(\t\x12\x19\n\x11storage_file_path\x18\x03 \x01(\t\x12\x11\n\trepo_root\x18\x04 \x01(\t\x12\x13\n\x0b\x62ranch_name\x18\x05 \x01(\t\x12,\n\x07request\x18\x64 \x01(\x0b\x32\x1b.ymir.controller.GeneralReq*Z\n\x07TvtType\x12\x12\n\x0eTvtTypeUnknown\x10\x00\x12\x13\n\x0fTvtTypeTraining\x10\x01\x12\x15\n\x11TvtTypeValidation\x10\x02\x12\x0f\n\x0bTvtTypeTest\x10\x03*\xc9\x01\n\x08TaskType\x12\x13\n\x0fTaskTypeUnknown\x10\x00\x12\x14\n\x10TaskTypeTraining\x10\x01\x12\x12\n\x0eTaskTypeMining\x10\x02\x12\x11\n\rTaskTypeLabel\x10\x03\x12\x12\n\x0eTaskTypeFilter\x10\x04\x12\x16\n\x12TaskTypeImportData\x10\x05\x12\x16\n\x12TaskTypeExportData\x10\x06\x12\x14\n\x10TaskTypeCopyData\x10\x07\x12\x11\n\rTaskTypeMerge\x10\x08*\x87\x01\n\tTaskState\x12\x14\n\x10TaskStateUnknown\x10\x00\x12\x14\n\x10TaskStatePending\x10\x01\x12\x14\n\x10TaskStateRunning\x10\x02\x12\x11\n\rTaskStateDone\x10\x03\x12\x12\n\x0eTaskStateError\x10\x04\x12\x11\n\rTaskStateMiss\x10\x05*\xeb\x01\n\x05RCode\x12\t\n\x05RC_OK\x10\x00\x12\x14\n\x10RC_ERROR_UNKNOWN\x10\x01\x12\x1d\n\x18RC_SERVICE_ERROR_UNKNOWN\x10\xe8\x07\x12\x1b\n\x16RC_SERVICE_INVALID_REQ\x10\xe9\x07\x12\x1c\n\x17RC_SERVICE_INVOKE_ERROR\x10\xea\x07\x12\x1f\n\x1aRC_SERVICE_UNKOWN_RESPONSE\x10\xeb\x07\x12\"\n\x1dRC_SERVICE_TASK_INVOKER_ERROR\x10\xec\x07\x12\"\n\x1dRC_SERVICE_INFO_INVOKER_ERROR\x10\xed\x07*<\n\x0bLabelFormat\x12\x11\n\rNO_ANNOTATION\x10\x00\x12\x0e\n\nPASCAL_VOC\x10\x01\x12\n\n\x06IF_ARK\x10\x02*U\n\nMirStorage\x12\x11\n\rMIR_METADATAS\x10\x00\x12\x13\n\x0fMIR_ANNOTATIONS\x10\x01\x12\x10\n\x0cMIR_KEYWORDS\x10\x02\x12\r\n\tMIR_TASKS\x10\x03*\x89\x03\n\x0bRequestType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x12\n\x0e\x43MD_BRANCH_DEL\x10\x01\x12\x13\n\x0f\x43MD_BRANCH_LIST\x10\x02\x12\x17\n\x13\x43MD_BRANCH_CHECKOUT\x10\x03\x12\x15\n\x11\x43MD_BRANCH_CREATE\x10\x04\x12\r\n\tCMD_CLONE\x10\x05\x12\x0e\n\nCMD_COMMIT\x10\x06\x12\x0e\n\nCMD_FILTER\x10\x07\x12\x0c\n\x08\x43MD_INIT\x10\x08\x12\x0b\n\x07\x43MD_LOG\x10\t\x12\r\n\tCMD_MERGE\x10\n\x12\x11\n\rCMD_INFERENCE\x10\x0b\x12\x11\n\rCMD_LABEL_ADD\x10\x0c\x12\x11\n\rCMD_LABEL_GET\x10\r\x12\r\n\tUSER_LIST\x10\x65\x12\x0f\n\x0bUSER_CREATE\x10\x66\x12\x0f\n\x0bUSER_REMOVE\x10g\x12\r\n\tREPO_LIST\x10h\x12\x0f\n\x0bREPO_CREATE\x10i\x12\x0f\n\x0bREPO_REMOVE\x10j\x12\x10\n\x0bTASK_CREATE\x10\xe9\x07\x12\x0e\n\tTASK_INFO\x10\xea\x07\x32l\n\x16mir_controller_service\x12R\n\x13\x64\x61ta_manage_request\x12\x1b.ymir.controller.GeneralReq\x1a\x1c.ymir.controller.GeneralResp\"\x00\x62\x06proto3'
 )
 
 _TVTTYPE = _descriptor.EnumDescriptor(
   name='TvtType',
-  full_name='ymir.backend.TvtType',
+  full_name='ymir.controller.TvtType',
   filename=None,
   file=DESCRIPTOR,
   create_key=_descriptor._internal_create_key,
@@ -53,15 +53,15 @@ _TVTTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=3424,
-  serialized_end=3514,
+  serialized_start=3514,
+  serialized_end=3604,
 )
 _sym_db.RegisterEnumDescriptor(_TVTTYPE)
 
 TvtType = enum_type_wrapper.EnumTypeWrapper(_TVTTYPE)
 _TASKTYPE = _descriptor.EnumDescriptor(
   name='TaskType',
-  full_name='ymir.backend.TaskType',
+  full_name='ymir.controller.TaskType',
   filename=None,
   file=DESCRIPTOR,
   create_key=_descriptor._internal_create_key,
@@ -114,15 +114,15 @@ _TASKTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=3517,
-  serialized_end=3718,
+  serialized_start=3607,
+  serialized_end=3808,
 )
 _sym_db.RegisterEnumDescriptor(_TASKTYPE)
 
 TaskType = enum_type_wrapper.EnumTypeWrapper(_TASKTYPE)
 _TASKSTATE = _descriptor.EnumDescriptor(
   name='TaskState',
-  full_name='ymir.backend.TaskState',
+  full_name='ymir.controller.TaskState',
   filename=None,
   file=DESCRIPTOR,
   create_key=_descriptor._internal_create_key,
@@ -160,15 +160,15 @@ _TASKSTATE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=3721,
-  serialized_end=3856,
+  serialized_start=3811,
+  serialized_end=3946,
 )
 _sym_db.RegisterEnumDescriptor(_TASKSTATE)
 
 TaskState = enum_type_wrapper.EnumTypeWrapper(_TASKSTATE)
 _RCODE = _descriptor.EnumDescriptor(
   name='RCode',
-  full_name='ymir.backend.RCode',
+  full_name='ymir.controller.RCode',
   filename=None,
   file=DESCRIPTOR,
   create_key=_descriptor._internal_create_key,
@@ -216,15 +216,15 @@ _RCODE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=3859,
-  serialized_end=4094,
+  serialized_start=3949,
+  serialized_end=4184,
 )
 _sym_db.RegisterEnumDescriptor(_RCODE)
 
 RCode = enum_type_wrapper.EnumTypeWrapper(_RCODE)
 _LABELFORMAT = _descriptor.EnumDescriptor(
   name='LabelFormat',
-  full_name='ymir.backend.LabelFormat',
+  full_name='ymir.controller.LabelFormat',
   filename=None,
   file=DESCRIPTOR,
   create_key=_descriptor._internal_create_key,
@@ -247,15 +247,15 @@ _LABELFORMAT = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=4096,
-  serialized_end=4156,
+  serialized_start=4186,
+  serialized_end=4246,
 )
 _sym_db.RegisterEnumDescriptor(_LABELFORMAT)
 
 LabelFormat = enum_type_wrapper.EnumTypeWrapper(_LABELFORMAT)
 _MIRSTORAGE = _descriptor.EnumDescriptor(
   name='MirStorage',
-  full_name='ymir.backend.MirStorage',
+  full_name='ymir.controller.MirStorage',
   filename=None,
   file=DESCRIPTOR,
   create_key=_descriptor._internal_create_key,
@@ -283,15 +283,15 @@ _MIRSTORAGE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=4158,
-  serialized_end=4243,
+  serialized_start=4248,
+  serialized_end=4333,
 )
 _sym_db.RegisterEnumDescriptor(_MIRSTORAGE)
 
 MirStorage = enum_type_wrapper.EnumTypeWrapper(_MIRSTORAGE)
 _REQUESTTYPE = _descriptor.EnumDescriptor(
   name='RequestType',
-  full_name='ymir.backend.RequestType',
+  full_name='ymir.controller.RequestType',
   filename=None,
   file=DESCRIPTOR,
   create_key=_descriptor._internal_create_key,
@@ -409,8 +409,8 @@ _REQUESTTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=4246,
-  serialized_end=4639,
+  serialized_start=4336,
+  serialized_end=4729,
 )
 _sym_db.RegisterEnumDescriptor(_REQUESTTYPE)
 
@@ -476,140 +476,140 @@ TASK_INFO = 1002
 
 _GENERALREQ = _descriptor.Descriptor(
   name='GeneralReq',
-  full_name='ymir.backend.GeneralReq',
+  full_name='ymir.controller.GeneralReq',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='user_id', full_name='ymir.backend.GeneralReq.user_id', index=0,
+      name='user_id', full_name='ymir.controller.GeneralReq.user_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='repo_id', full_name='ymir.backend.GeneralReq.repo_id', index=1,
+      name='repo_id', full_name='ymir.controller.GeneralReq.repo_id', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='req_type', full_name='ymir.backend.GeneralReq.req_type', index=2,
+      name='req_type', full_name='ymir.controller.GeneralReq.req_type', index=2,
       number=3, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='task_id', full_name='ymir.backend.GeneralReq.task_id', index=3,
+      name='task_id', full_name='ymir.controller.GeneralReq.task_id', index=3,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='singleton_op', full_name='ymir.backend.GeneralReq.singleton_op', index=4,
+      name='singleton_op', full_name='ymir.controller.GeneralReq.singleton_op', index=4,
       number=5, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='his_task_id', full_name='ymir.backend.GeneralReq.his_task_id', index=5,
+      name='his_task_id', full_name='ymir.controller.GeneralReq.his_task_id', index=5,
       number=6, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='dst_task_id', full_name='ymir.backend.GeneralReq.dst_task_id', index=6,
+      name='dst_task_id', full_name='ymir.controller.GeneralReq.dst_task_id', index=6,
       number=7, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='in_dataset_ids', full_name='ymir.backend.GeneralReq.in_dataset_ids', index=7,
+      name='in_dataset_ids', full_name='ymir.controller.GeneralReq.in_dataset_ids', index=7,
       number=8, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='ex_dataset_ids', full_name='ymir.backend.GeneralReq.ex_dataset_ids', index=8,
+      name='ex_dataset_ids', full_name='ymir.controller.GeneralReq.ex_dataset_ids', index=8,
       number=9, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='in_class_ids', full_name='ymir.backend.GeneralReq.in_class_ids', index=9,
+      name='in_class_ids', full_name='ymir.controller.GeneralReq.in_class_ids', index=9,
       number=10, type=5, cpp_type=1, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='ex_class_ids', full_name='ymir.backend.GeneralReq.ex_class_ids', index=10,
+      name='ex_class_ids', full_name='ymir.controller.GeneralReq.ex_class_ids', index=10,
       number=11, type=5, cpp_type=1, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='force', full_name='ymir.backend.GeneralReq.force', index=11,
+      name='force', full_name='ymir.controller.GeneralReq.force', index=11,
       number=12, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='commit_message', full_name='ymir.backend.GeneralReq.commit_message', index=12,
+      name='commit_message', full_name='ymir.controller.GeneralReq.commit_message', index=12,
       number=13, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='model_hash', full_name='ymir.backend.GeneralReq.model_hash', index=13,
+      name='model_hash', full_name='ymir.controller.GeneralReq.model_hash', index=13,
       number=14, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='asset_dir', full_name='ymir.backend.GeneralReq.asset_dir', index=14,
+      name='asset_dir', full_name='ymir.controller.GeneralReq.asset_dir', index=14,
       number=15, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='model_config', full_name='ymir.backend.GeneralReq.model_config', index=15,
+      name='model_config', full_name='ymir.controller.GeneralReq.model_config', index=15,
       number=16, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='private_labels', full_name='ymir.backend.GeneralReq.private_labels', index=16,
+      name='private_labels', full_name='ymir.controller.GeneralReq.private_labels', index=16,
       number=17, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='req_create_task', full_name='ymir.backend.GeneralReq.req_create_task', index=17,
+      name='req_create_task', full_name='ymir.controller.GeneralReq.req_create_task', index=17,
       number=1001, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='req_get_task_info', full_name='ymir.backend.GeneralReq.req_get_task_info', index=18,
+      name='req_get_task_info', full_name='ymir.controller.GeneralReq.req_get_task_info', index=18,
       number=1002, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -627,63 +627,63 @@ _GENERALREQ = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=32,
-  serialized_end=533,
+  serialized_start=35,
+  serialized_end=545,
 )
 
 
 _GENERALRESP = _descriptor.Descriptor(
   name='GeneralResp',
-  full_name='ymir.backend.GeneralResp',
+  full_name='ymir.controller.GeneralResp',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='code', full_name='ymir.backend.GeneralResp.code', index=0,
+      name='code', full_name='ymir.controller.GeneralResp.code', index=0,
       number=1, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='req_task_id', full_name='ymir.backend.GeneralResp.req_task_id', index=1,
+      name='req_task_id', full_name='ymir.controller.GeneralResp.req_task_id', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='message', full_name='ymir.backend.GeneralResp.message', index=2,
+      name='message', full_name='ymir.controller.GeneralResp.message', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='ext_strs', full_name='ymir.backend.GeneralResp.ext_strs', index=3,
+      name='ext_strs', full_name='ymir.controller.GeneralResp.ext_strs', index=3,
       number=4, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='csv_labels', full_name='ymir.backend.GeneralResp.csv_labels', index=4,
+      name='csv_labels', full_name='ymir.controller.GeneralResp.csv_labels', index=4,
       number=5, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='resp_get_task_info', full_name='ymir.backend.GeneralResp.resp_get_task_info', index=5,
+      name='resp_get_task_info', full_name='ymir.controller.GeneralResp.resp_get_task_info', index=5,
       number=1000, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='detection', full_name='ymir.backend.GeneralResp.detection', index=6,
+      name='detection', full_name='ymir.controller.GeneralResp.detection', index=6,
       number=1001, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -701,91 +701,91 @@ _GENERALRESP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=536,
-  serialized_end=751,
+  serialized_start=548,
+  serialized_end=769,
 )
 
 
 _REQCREATETASK = _descriptor.Descriptor(
   name='ReqCreateTask',
-  full_name='ymir.backend.ReqCreateTask',
+  full_name='ymir.controller.ReqCreateTask',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='task_type', full_name='ymir.backend.ReqCreateTask.task_type', index=0,
+      name='task_type', full_name='ymir.controller.ReqCreateTask.task_type', index=0,
       number=1, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='sampling_rate', full_name='ymir.backend.ReqCreateTask.sampling_rate', index=1,
+      name='sampling_rate', full_name='ymir.controller.ReqCreateTask.sampling_rate', index=1,
       number=2, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='no_task_monitor', full_name='ymir.backend.ReqCreateTask.no_task_monitor', index=2,
+      name='no_task_monitor', full_name='ymir.controller.ReqCreateTask.no_task_monitor', index=2,
       number=3, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='filter', full_name='ymir.backend.ReqCreateTask.filter', index=3,
+      name='filter', full_name='ymir.controller.ReqCreateTask.filter', index=3,
       number=101, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='training', full_name='ymir.backend.ReqCreateTask.training', index=4,
+      name='training', full_name='ymir.controller.ReqCreateTask.training', index=4,
       number=102, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='mining', full_name='ymir.backend.ReqCreateTask.mining', index=5,
+      name='mining', full_name='ymir.controller.ReqCreateTask.mining', index=5,
       number=103, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='importing', full_name='ymir.backend.ReqCreateTask.importing', index=6,
+      name='importing', full_name='ymir.controller.ReqCreateTask.importing', index=6,
       number=104, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='exporting', full_name='ymir.backend.ReqCreateTask.exporting', index=7,
+      name='exporting', full_name='ymir.controller.ReqCreateTask.exporting', index=7,
       number=105, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='inference', full_name='ymir.backend.ReqCreateTask.inference', index=8,
+      name='inference', full_name='ymir.controller.ReqCreateTask.inference', index=8,
       number=106, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='copy', full_name='ymir.backend.ReqCreateTask.copy', index=9,
+      name='copy', full_name='ymir.controller.ReqCreateTask.copy', index=9,
       number=107, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='labeling', full_name='ymir.backend.ReqCreateTask.labeling', index=10,
+      name='labeling', full_name='ymir.controller.ReqCreateTask.labeling', index=10,
       number=108, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -803,35 +803,35 @@ _REQCREATETASK = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=754,
-  serialized_end=1246,
+  serialized_start=772,
+  serialized_end=1291,
 )
 
 
 _TASKREQFILTER = _descriptor.Descriptor(
   name='TaskReqFilter',
-  full_name='ymir.backend.TaskReqFilter',
+  full_name='ymir.controller.TaskReqFilter',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='in_dataset_ids', full_name='ymir.backend.TaskReqFilter.in_dataset_ids', index=0,
+      name='in_dataset_ids', full_name='ymir.controller.TaskReqFilter.in_dataset_ids', index=0,
       number=1, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='in_class_ids', full_name='ymir.backend.TaskReqFilter.in_class_ids', index=1,
+      name='in_class_ids', full_name='ymir.controller.TaskReqFilter.in_class_ids', index=1,
       number=2, type=5, cpp_type=1, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='ex_class_ids', full_name='ymir.backend.TaskReqFilter.ex_class_ids', index=2,
+      name='ex_class_ids', full_name='ymir.controller.TaskReqFilter.ex_class_ids', index=2,
       number=3, type=5, cpp_type=1, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -849,28 +849,28 @@ _TASKREQFILTER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1248,
-  serialized_end=1331,
+  serialized_start=1293,
+  serialized_end=1376,
 )
 
 
 _TASKREQTRAINING_TRAININGDATASETTYPE = _descriptor.Descriptor(
   name='TrainingDatasetType',
-  full_name='ymir.backend.TaskReqTraining.TrainingDatasetType',
+  full_name='ymir.controller.TaskReqTraining.TrainingDatasetType',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='dataset_id', full_name='ymir.backend.TaskReqTraining.TrainingDatasetType.dataset_id', index=0,
+      name='dataset_id', full_name='ymir.controller.TaskReqTraining.TrainingDatasetType.dataset_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='dataset_type', full_name='ymir.backend.TaskReqTraining.TrainingDatasetType.dataset_type', index=1,
+      name='dataset_type', full_name='ymir.controller.TaskReqTraining.TrainingDatasetType.dataset_type', index=1,
       number=2, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -888,34 +888,34 @@ _TASKREQTRAINING_TRAININGDATASETTYPE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1477,
-  serialized_end=1563,
+  serialized_start=1525,
+  serialized_end=1614,
 )
 
 _TASKREQTRAINING = _descriptor.Descriptor(
   name='TaskReqTraining',
-  full_name='ymir.backend.TaskReqTraining',
+  full_name='ymir.controller.TaskReqTraining',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='in_dataset_types', full_name='ymir.backend.TaskReqTraining.in_dataset_types', index=0,
+      name='in_dataset_types', full_name='ymir.controller.TaskReqTraining.in_dataset_types', index=0,
       number=1, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='in_class_ids', full_name='ymir.backend.TaskReqTraining.in_class_ids', index=1,
+      name='in_class_ids', full_name='ymir.controller.TaskReqTraining.in_class_ids', index=1,
       number=2, type=5, cpp_type=1, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='training_config', full_name='ymir.backend.TaskReqTraining.training_config', index=2,
+      name='training_config', full_name='ymir.controller.TaskReqTraining.training_config', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -933,49 +933,49 @@ _TASKREQTRAINING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1334,
-  serialized_end=1563,
+  serialized_start=1379,
+  serialized_end=1614,
 )
 
 
 _TASKREQMINING = _descriptor.Descriptor(
   name='TaskReqMining',
-  full_name='ymir.backend.TaskReqMining',
+  full_name='ymir.controller.TaskReqMining',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='in_dataset_ids', full_name='ymir.backend.TaskReqMining.in_dataset_ids', index=0,
+      name='in_dataset_ids', full_name='ymir.controller.TaskReqMining.in_dataset_ids', index=0,
       number=1, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='ex_dataset_ids', full_name='ymir.backend.TaskReqMining.ex_dataset_ids', index=1,
+      name='ex_dataset_ids', full_name='ymir.controller.TaskReqMining.ex_dataset_ids', index=1,
       number=2, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='model_hash', full_name='ymir.backend.TaskReqMining.model_hash', index=2,
+      name='model_hash', full_name='ymir.controller.TaskReqMining.model_hash', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='top_k', full_name='ymir.backend.TaskReqMining.top_k', index=3,
+      name='top_k', full_name='ymir.controller.TaskReqMining.top_k', index=3,
       number=4, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='mining_config', full_name='ymir.backend.TaskReqMining.mining_config', index=4,
+      name='mining_config', full_name='ymir.controller.TaskReqMining.mining_config', index=4,
       number=5, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -993,28 +993,28 @@ _TASKREQMINING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1565,
-  serialized_end=1686,
+  serialized_start=1616,
+  serialized_end=1737,
 )
 
 
 _TASKREQIMPORTING = _descriptor.Descriptor(
   name='TaskReqImporting',
-  full_name='ymir.backend.TaskReqImporting',
+  full_name='ymir.controller.TaskReqImporting',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='asset_dir', full_name='ymir.backend.TaskReqImporting.asset_dir', index=0,
+      name='asset_dir', full_name='ymir.controller.TaskReqImporting.asset_dir', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='annotation_dir', full_name='ymir.backend.TaskReqImporting.annotation_dir', index=1,
+      name='annotation_dir', full_name='ymir.controller.TaskReqImporting.annotation_dir', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -1032,42 +1032,42 @@ _TASKREQIMPORTING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1688,
-  serialized_end=1749,
+  serialized_start=1739,
+  serialized_end=1800,
 )
 
 
 _TASKREQEXPORTING = _descriptor.Descriptor(
   name='TaskReqExporting',
-  full_name='ymir.backend.TaskReqExporting',
+  full_name='ymir.controller.TaskReqExporting',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='dataset_id', full_name='ymir.backend.TaskReqExporting.dataset_id', index=0,
+      name='dataset_id', full_name='ymir.controller.TaskReqExporting.dataset_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='format', full_name='ymir.backend.TaskReqExporting.format', index=1,
+      name='format', full_name='ymir.controller.TaskReqExporting.format', index=1,
       number=2, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='asset_dir', full_name='ymir.backend.TaskReqExporting.asset_dir', index=2,
+      name='asset_dir', full_name='ymir.controller.TaskReqExporting.asset_dir', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='annotation_dir', full_name='ymir.backend.TaskReqExporting.annotation_dir', index=3,
+      name='annotation_dir', full_name='ymir.controller.TaskReqExporting.annotation_dir', index=3,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -1085,14 +1085,14 @@ _TASKREQEXPORTING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1751,
-  serialized_end=1875,
+  serialized_start=1802,
+  serialized_end=1929,
 )
 
 
 _TASKREQINFERENCE = _descriptor.Descriptor(
   name='TaskReqInference',
-  full_name='ymir.backend.TaskReqInference',
+  full_name='ymir.controller.TaskReqInference',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
@@ -1110,35 +1110,35 @@ _TASKREQINFERENCE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1877,
-  serialized_end=1895,
+  serialized_start=1931,
+  serialized_end=1949,
 )
 
 
 _TASKREQCOPYDATA = _descriptor.Descriptor(
   name='TaskReqCopyData',
-  full_name='ymir.backend.TaskReqCopyData',
+  full_name='ymir.controller.TaskReqCopyData',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='src_user_id', full_name='ymir.backend.TaskReqCopyData.src_user_id', index=0,
+      name='src_user_id', full_name='ymir.controller.TaskReqCopyData.src_user_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='src_repo_id', full_name='ymir.backend.TaskReqCopyData.src_repo_id', index=1,
+      name='src_repo_id', full_name='ymir.controller.TaskReqCopyData.src_repo_id', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='src_dataset_id', full_name='ymir.backend.TaskReqCopyData.src_dataset_id', index=2,
+      name='src_dataset_id', full_name='ymir.controller.TaskReqCopyData.src_dataset_id', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -1156,49 +1156,49 @@ _TASKREQCOPYDATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1897,
-  serialized_end=1980,
+  serialized_start=1951,
+  serialized_end=2034,
 )
 
 
 _TASKREQLABELING = _descriptor.Descriptor(
   name='TaskReqLabeling',
-  full_name='ymir.backend.TaskReqLabeling',
+  full_name='ymir.controller.TaskReqLabeling',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='dataset_id', full_name='ymir.backend.TaskReqLabeling.dataset_id', index=0,
+      name='dataset_id', full_name='ymir.controller.TaskReqLabeling.dataset_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='labeler_accounts', full_name='ymir.backend.TaskReqLabeling.labeler_accounts', index=1,
+      name='labeler_accounts', full_name='ymir.controller.TaskReqLabeling.labeler_accounts', index=1,
       number=2, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='in_class_ids', full_name='ymir.backend.TaskReqLabeling.in_class_ids', index=2,
+      name='in_class_ids', full_name='ymir.controller.TaskReqLabeling.in_class_ids', index=2,
       number=3, type=5, cpp_type=1, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='expert_instruction_url', full_name='ymir.backend.TaskReqLabeling.expert_instruction_url', index=3,
+      name='expert_instruction_url', full_name='ymir.controller.TaskReqLabeling.expert_instruction_url', index=3,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='project_name', full_name='ymir.backend.TaskReqLabeling.project_name', index=4,
+      name='project_name', full_name='ymir.controller.TaskReqLabeling.project_name', index=4,
       number=5, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -1216,21 +1216,21 @@ _TASKREQLABELING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1983,
-  serialized_end=2122,
+  serialized_start=2037,
+  serialized_end=2176,
 )
 
 
 _REQGETTASKINFO = _descriptor.Descriptor(
   name='ReqGetTaskInfo',
-  full_name='ymir.backend.ReqGetTaskInfo',
+  full_name='ymir.controller.ReqGetTaskInfo',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='task_ids', full_name='ymir.backend.ReqGetTaskInfo.task_ids', index=0,
+      name='task_ids', full_name='ymir.controller.ReqGetTaskInfo.task_ids', index=0,
       number=1, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -1248,28 +1248,28 @@ _REQGETTASKINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2124,
-  serialized_end=2158,
+  serialized_start=2178,
+  serialized_end=2212,
 )
 
 
 _RESPGETTASKINFO_TASKINFOSENTRY = _descriptor.Descriptor(
   name='TaskInfosEntry',
-  full_name='ymir.backend.RespGetTaskInfo.TaskInfosEntry',
+  full_name='ymir.controller.RespGetTaskInfo.TaskInfosEntry',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='key', full_name='ymir.backend.RespGetTaskInfo.TaskInfosEntry.key', index=0,
+      name='key', full_name='ymir.controller.RespGetTaskInfo.TaskInfosEntry.key', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='value', full_name='ymir.backend.RespGetTaskInfo.TaskInfosEntry.value', index=1,
+      name='value', full_name='ymir.controller.RespGetTaskInfo.TaskInfosEntry.value', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -1287,20 +1287,20 @@ _RESPGETTASKINFO_TASKINFOSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2246,
-  serialized_end=2322,
+  serialized_start=2303,
+  serialized_end=2382,
 )
 
 _RESPGETTASKINFO = _descriptor.Descriptor(
   name='RespGetTaskInfo',
-  full_name='ymir.backend.RespGetTaskInfo',
+  full_name='ymir.controller.RespGetTaskInfo',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='task_infos', full_name='ymir.backend.RespGetTaskInfo.task_infos', index=0,
+      name='task_infos', full_name='ymir.controller.RespGetTaskInfo.task_infos', index=0,
       number=1, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -1318,91 +1318,91 @@ _RESPGETTASKINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2161,
-  serialized_end=2322,
+  serialized_start=2215,
+  serialized_end=2382,
 )
 
 
 _TASKINFOITEM = _descriptor.Descriptor(
   name='TaskInfoItem',
-  full_name='ymir.backend.TaskInfoItem',
+  full_name='ymir.controller.TaskInfoItem',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='task_id', full_name='ymir.backend.TaskInfoItem.task_id', index=0,
+      name='task_id', full_name='ymir.controller.TaskInfoItem.task_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='base_task_id', full_name='ymir.backend.TaskInfoItem.base_task_id', index=1,
+      name='base_task_id', full_name='ymir.controller.TaskInfoItem.base_task_id', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='user_id', full_name='ymir.backend.TaskInfoItem.user_id', index=2,
+      name='user_id', full_name='ymir.controller.TaskInfoItem.user_id', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='repo_id', full_name='ymir.backend.TaskInfoItem.repo_id', index=3,
+      name='repo_id', full_name='ymir.controller.TaskInfoItem.repo_id', index=3,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='type', full_name='ymir.backend.TaskInfoItem.type', index=4,
+      name='type', full_name='ymir.controller.TaskInfoItem.type', index=4,
       number=5, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='state', full_name='ymir.backend.TaskInfoItem.state', index=5,
+      name='state', full_name='ymir.controller.TaskInfoItem.state', index=5,
       number=6, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='start_timestamp', full_name='ymir.backend.TaskInfoItem.start_timestamp', index=6,
+      name='start_timestamp', full_name='ymir.controller.TaskInfoItem.start_timestamp', index=6,
       number=7, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='finish_timestamp', full_name='ymir.backend.TaskInfoItem.finish_timestamp', index=7,
+      name='finish_timestamp', full_name='ymir.controller.TaskInfoItem.finish_timestamp', index=7,
       number=8, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='update_timestamp', full_name='ymir.backend.TaskInfoItem.update_timestamp', index=8,
+      name='update_timestamp', full_name='ymir.controller.TaskInfoItem.update_timestamp', index=8,
       number=9, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='percent', full_name='ymir.backend.TaskInfoItem.percent', index=9,
+      name='percent', full_name='ymir.controller.TaskInfoItem.percent', index=9,
       number=10, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='last_error', full_name='ymir.backend.TaskInfoItem.last_error', index=10,
+      name='last_error', full_name='ymir.controller.TaskInfoItem.last_error', index=10,
       number=11, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -1420,28 +1420,28 @@ _TASKINFOITEM = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2325,
-  serialized_end=2604,
+  serialized_start=2385,
+  serialized_end=2670,
 )
 
 
 _RESPCMDINFERENCE_IMAGEANNOTATIONSENTRY = _descriptor.Descriptor(
   name='ImageAnnotationsEntry',
-  full_name='ymir.backend.RespCMDInference.ImageAnnotationsEntry',
+  full_name='ymir.controller.RespCMDInference.ImageAnnotationsEntry',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='key', full_name='ymir.backend.RespCMDInference.ImageAnnotationsEntry.key', index=0,
+      name='key', full_name='ymir.controller.RespCMDInference.ImageAnnotationsEntry.key', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='value', full_name='ymir.backend.RespCMDInference.ImageAnnotationsEntry.value', index=1,
+      name='value', full_name='ymir.controller.RespCMDInference.ImageAnnotationsEntry.value', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -1459,20 +1459,20 @@ _RESPCMDINFERENCE_IMAGEANNOTATIONSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2708,
-  serialized_end=2801,
+  serialized_start=2777,
+  serialized_end=2873,
 )
 
 _RESPCMDINFERENCE = _descriptor.Descriptor(
   name='RespCMDInference',
-  full_name='ymir.backend.RespCMDInference',
+  full_name='ymir.controller.RespCMDInference',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='image_annotations', full_name='ymir.backend.RespCMDInference.image_annotations', index=0,
+      name='image_annotations', full_name='ymir.controller.RespCMDInference.image_annotations', index=0,
       number=1, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -1490,21 +1490,21 @@ _RESPCMDINFERENCE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2607,
-  serialized_end=2801,
+  serialized_start=2673,
+  serialized_end=2873,
 )
 
 
 _SINGLEIMAGEANNOTATIONS = _descriptor.Descriptor(
   name='SingleImageAnnotations',
-  full_name='ymir.backend.SingleImageAnnotations',
+  full_name='ymir.controller.SingleImageAnnotations',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='annotations', full_name='ymir.backend.SingleImageAnnotations.annotations', index=0,
+      name='annotations', full_name='ymir.controller.SingleImageAnnotations.annotations', index=0,
       number=2, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -1522,49 +1522,49 @@ _SINGLEIMAGEANNOTATIONS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2803,
-  serialized_end=2874,
+  serialized_start=2875,
+  serialized_end=2949,
 )
 
 
 _ANNOTATION = _descriptor.Descriptor(
   name='Annotation',
-  full_name='ymir.backend.Annotation',
+  full_name='ymir.controller.Annotation',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='index', full_name='ymir.backend.Annotation.index', index=0,
+      name='index', full_name='ymir.controller.Annotation.index', index=0,
       number=1, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='box', full_name='ymir.backend.Annotation.box', index=1,
+      name='box', full_name='ymir.controller.Annotation.box', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='class_id', full_name='ymir.backend.Annotation.class_id', index=2,
+      name='class_id', full_name='ymir.controller.Annotation.class_id', index=2,
       number=3, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='score', full_name='ymir.backend.Annotation.score', index=3,
+      name='score', full_name='ymir.controller.Annotation.score', index=3,
       number=4, type=1, cpp_type=5, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='class_name', full_name='ymir.backend.Annotation.class_name', index=4,
+      name='class_name', full_name='ymir.controller.Annotation.class_name', index=4,
       number=5, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -1582,42 +1582,42 @@ _ANNOTATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2876,
-  serialized_end=2989,
+  serialized_start=2951,
+  serialized_end=3067,
 )
 
 
 _RECT = _descriptor.Descriptor(
   name='Rect',
-  full_name='ymir.backend.Rect',
+  full_name='ymir.controller.Rect',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='x', full_name='ymir.backend.Rect.x', index=0,
+      name='x', full_name='ymir.controller.Rect.x', index=0,
       number=1, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='y', full_name='ymir.backend.Rect.y', index=1,
+      name='y', full_name='ymir.controller.Rect.y', index=1,
       number=2, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='w', full_name='ymir.backend.Rect.w', index=2,
+      name='w', full_name='ymir.controller.Rect.w', index=2,
       number=3, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='h', full_name='ymir.backend.Rect.h', index=3,
+      name='h', full_name='ymir.controller.Rect.h', index=3,
       number=4, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -1635,28 +1635,28 @@ _RECT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2991,
-  serialized_end=3041,
+  serialized_start=3069,
+  serialized_end=3119,
 )
 
 
 _TASKMONITORSTORAGE_TASKSENTRY = _descriptor.Descriptor(
   name='TasksEntry',
-  full_name='ymir.backend.TaskMonitorStorage.TasksEntry',
+  full_name='ymir.controller.TaskMonitorStorage.TasksEntry',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='key', full_name='ymir.backend.TaskMonitorStorage.TasksEntry.key', index=0,
+      name='key', full_name='ymir.controller.TaskMonitorStorage.TasksEntry.key', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='value', full_name='ymir.backend.TaskMonitorStorage.TasksEntry.value', index=1,
+      name='value', full_name='ymir.controller.TaskMonitorStorage.TasksEntry.value', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -1674,20 +1674,20 @@ _TASKMONITORSTORAGE_TASKSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3126,
-  serialized_end=3208,
+  serialized_start=3207,
+  serialized_end=3292,
 )
 
 _TASKMONITORSTORAGE = _descriptor.Descriptor(
   name='TaskMonitorStorage',
-  full_name='ymir.backend.TaskMonitorStorage',
+  full_name='ymir.controller.TaskMonitorStorage',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='tasks', full_name='ymir.backend.TaskMonitorStorage.tasks', index=0,
+      name='tasks', full_name='ymir.controller.TaskMonitorStorage.tasks', index=0,
       number=1, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -1705,56 +1705,56 @@ _TASKMONITORSTORAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3044,
-  serialized_end=3208,
+  serialized_start=3122,
+  serialized_end=3292,
 )
 
 
 _TASKMONITORSTORAGEITEM = _descriptor.Descriptor(
   name='TaskMonitorStorageItem',
-  full_name='ymir.backend.TaskMonitorStorageItem',
+  full_name='ymir.controller.TaskMonitorStorageItem',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='general_info', full_name='ymir.backend.TaskMonitorStorageItem.general_info', index=0,
+      name='general_info', full_name='ymir.controller.TaskMonitorStorageItem.general_info', index=0,
       number=1, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='monitor_file_path', full_name='ymir.backend.TaskMonitorStorageItem.monitor_file_path', index=1,
+      name='monitor_file_path', full_name='ymir.controller.TaskMonitorStorageItem.monitor_file_path', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='storage_file_path', full_name='ymir.backend.TaskMonitorStorageItem.storage_file_path', index=2,
+      name='storage_file_path', full_name='ymir.controller.TaskMonitorStorageItem.storage_file_path', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='repo_root', full_name='ymir.backend.TaskMonitorStorageItem.repo_root', index=3,
+      name='repo_root', full_name='ymir.controller.TaskMonitorStorageItem.repo_root', index=3,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='branch_name', full_name='ymir.backend.TaskMonitorStorageItem.branch_name', index=4,
+      name='branch_name', full_name='ymir.controller.TaskMonitorStorageItem.branch_name', index=4,
       number=5, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='request', full_name='ymir.backend.TaskMonitorStorageItem.request', index=5,
+      name='request', full_name='ymir.controller.TaskMonitorStorageItem.request', index=5,
       number=100, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -1772,8 +1772,8 @@ _TASKMONITORSTORAGEITEM = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3211,
-  serialized_end=3422,
+  serialized_start=3295,
+  serialized_end=3512,
 )
 
 _GENERALREQ.fields_by_name['req_type'].enum_type = _REQUESTTYPE
@@ -1841,28 +1841,28 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 GeneralReq = _reflection.GeneratedProtocolMessageType('GeneralReq', (_message.Message,), {
   'DESCRIPTOR' : _GENERALREQ,
   '__module__' : 'backend_pb2'
-  # @@protoc_insertion_point(class_scope:ymir.backend.GeneralReq)
+  # @@protoc_insertion_point(class_scope:ymir.controller.GeneralReq)
   })
 _sym_db.RegisterMessage(GeneralReq)
 
 GeneralResp = _reflection.GeneratedProtocolMessageType('GeneralResp', (_message.Message,), {
   'DESCRIPTOR' : _GENERALRESP,
   '__module__' : 'backend_pb2'
-  # @@protoc_insertion_point(class_scope:ymir.backend.GeneralResp)
+  # @@protoc_insertion_point(class_scope:ymir.controller.GeneralResp)
   })
 _sym_db.RegisterMessage(GeneralResp)
 
 ReqCreateTask = _reflection.GeneratedProtocolMessageType('ReqCreateTask', (_message.Message,), {
   'DESCRIPTOR' : _REQCREATETASK,
   '__module__' : 'backend_pb2'
-  # @@protoc_insertion_point(class_scope:ymir.backend.ReqCreateTask)
+  # @@protoc_insertion_point(class_scope:ymir.controller.ReqCreateTask)
   })
 _sym_db.RegisterMessage(ReqCreateTask)
 
 TaskReqFilter = _reflection.GeneratedProtocolMessageType('TaskReqFilter', (_message.Message,), {
   'DESCRIPTOR' : _TASKREQFILTER,
   '__module__' : 'backend_pb2'
-  # @@protoc_insertion_point(class_scope:ymir.backend.TaskReqFilter)
+  # @@protoc_insertion_point(class_scope:ymir.controller.TaskReqFilter)
   })
 _sym_db.RegisterMessage(TaskReqFilter)
 
@@ -1871,12 +1871,12 @@ TaskReqTraining = _reflection.GeneratedProtocolMessageType('TaskReqTraining', (_
   'TrainingDatasetType' : _reflection.GeneratedProtocolMessageType('TrainingDatasetType', (_message.Message,), {
     'DESCRIPTOR' : _TASKREQTRAINING_TRAININGDATASETTYPE,
     '__module__' : 'backend_pb2'
-    # @@protoc_insertion_point(class_scope:ymir.backend.TaskReqTraining.TrainingDatasetType)
+    # @@protoc_insertion_point(class_scope:ymir.controller.TaskReqTraining.TrainingDatasetType)
     })
   ,
   'DESCRIPTOR' : _TASKREQTRAINING,
   '__module__' : 'backend_pb2'
-  # @@protoc_insertion_point(class_scope:ymir.backend.TaskReqTraining)
+  # @@protoc_insertion_point(class_scope:ymir.controller.TaskReqTraining)
   })
 _sym_db.RegisterMessage(TaskReqTraining)
 _sym_db.RegisterMessage(TaskReqTraining.TrainingDatasetType)
@@ -1884,49 +1884,49 @@ _sym_db.RegisterMessage(TaskReqTraining.TrainingDatasetType)
 TaskReqMining = _reflection.GeneratedProtocolMessageType('TaskReqMining', (_message.Message,), {
   'DESCRIPTOR' : _TASKREQMINING,
   '__module__' : 'backend_pb2'
-  # @@protoc_insertion_point(class_scope:ymir.backend.TaskReqMining)
+  # @@protoc_insertion_point(class_scope:ymir.controller.TaskReqMining)
   })
 _sym_db.RegisterMessage(TaskReqMining)
 
 TaskReqImporting = _reflection.GeneratedProtocolMessageType('TaskReqImporting', (_message.Message,), {
   'DESCRIPTOR' : _TASKREQIMPORTING,
   '__module__' : 'backend_pb2'
-  # @@protoc_insertion_point(class_scope:ymir.backend.TaskReqImporting)
+  # @@protoc_insertion_point(class_scope:ymir.controller.TaskReqImporting)
   })
 _sym_db.RegisterMessage(TaskReqImporting)
 
 TaskReqExporting = _reflection.GeneratedProtocolMessageType('TaskReqExporting', (_message.Message,), {
   'DESCRIPTOR' : _TASKREQEXPORTING,
   '__module__' : 'backend_pb2'
-  # @@protoc_insertion_point(class_scope:ymir.backend.TaskReqExporting)
+  # @@protoc_insertion_point(class_scope:ymir.controller.TaskReqExporting)
   })
 _sym_db.RegisterMessage(TaskReqExporting)
 
 TaskReqInference = _reflection.GeneratedProtocolMessageType('TaskReqInference', (_message.Message,), {
   'DESCRIPTOR' : _TASKREQINFERENCE,
   '__module__' : 'backend_pb2'
-  # @@protoc_insertion_point(class_scope:ymir.backend.TaskReqInference)
+  # @@protoc_insertion_point(class_scope:ymir.controller.TaskReqInference)
   })
 _sym_db.RegisterMessage(TaskReqInference)
 
 TaskReqCopyData = _reflection.GeneratedProtocolMessageType('TaskReqCopyData', (_message.Message,), {
   'DESCRIPTOR' : _TASKREQCOPYDATA,
   '__module__' : 'backend_pb2'
-  # @@protoc_insertion_point(class_scope:ymir.backend.TaskReqCopyData)
+  # @@protoc_insertion_point(class_scope:ymir.controller.TaskReqCopyData)
   })
 _sym_db.RegisterMessage(TaskReqCopyData)
 
 TaskReqLabeling = _reflection.GeneratedProtocolMessageType('TaskReqLabeling', (_message.Message,), {
   'DESCRIPTOR' : _TASKREQLABELING,
   '__module__' : 'backend_pb2'
-  # @@protoc_insertion_point(class_scope:ymir.backend.TaskReqLabeling)
+  # @@protoc_insertion_point(class_scope:ymir.controller.TaskReqLabeling)
   })
 _sym_db.RegisterMessage(TaskReqLabeling)
 
 ReqGetTaskInfo = _reflection.GeneratedProtocolMessageType('ReqGetTaskInfo', (_message.Message,), {
   'DESCRIPTOR' : _REQGETTASKINFO,
   '__module__' : 'backend_pb2'
-  # @@protoc_insertion_point(class_scope:ymir.backend.ReqGetTaskInfo)
+  # @@protoc_insertion_point(class_scope:ymir.controller.ReqGetTaskInfo)
   })
 _sym_db.RegisterMessage(ReqGetTaskInfo)
 
@@ -1935,12 +1935,12 @@ RespGetTaskInfo = _reflection.GeneratedProtocolMessageType('RespGetTaskInfo', (_
   'TaskInfosEntry' : _reflection.GeneratedProtocolMessageType('TaskInfosEntry', (_message.Message,), {
     'DESCRIPTOR' : _RESPGETTASKINFO_TASKINFOSENTRY,
     '__module__' : 'backend_pb2'
-    # @@protoc_insertion_point(class_scope:ymir.backend.RespGetTaskInfo.TaskInfosEntry)
+    # @@protoc_insertion_point(class_scope:ymir.controller.RespGetTaskInfo.TaskInfosEntry)
     })
   ,
   'DESCRIPTOR' : _RESPGETTASKINFO,
   '__module__' : 'backend_pb2'
-  # @@protoc_insertion_point(class_scope:ymir.backend.RespGetTaskInfo)
+  # @@protoc_insertion_point(class_scope:ymir.controller.RespGetTaskInfo)
   })
 _sym_db.RegisterMessage(RespGetTaskInfo)
 _sym_db.RegisterMessage(RespGetTaskInfo.TaskInfosEntry)
@@ -1948,7 +1948,7 @@ _sym_db.RegisterMessage(RespGetTaskInfo.TaskInfosEntry)
 TaskInfoItem = _reflection.GeneratedProtocolMessageType('TaskInfoItem', (_message.Message,), {
   'DESCRIPTOR' : _TASKINFOITEM,
   '__module__' : 'backend_pb2'
-  # @@protoc_insertion_point(class_scope:ymir.backend.TaskInfoItem)
+  # @@protoc_insertion_point(class_scope:ymir.controller.TaskInfoItem)
   })
 _sym_db.RegisterMessage(TaskInfoItem)
 
@@ -1957,12 +1957,12 @@ RespCMDInference = _reflection.GeneratedProtocolMessageType('RespCMDInference', 
   'ImageAnnotationsEntry' : _reflection.GeneratedProtocolMessageType('ImageAnnotationsEntry', (_message.Message,), {
     'DESCRIPTOR' : _RESPCMDINFERENCE_IMAGEANNOTATIONSENTRY,
     '__module__' : 'backend_pb2'
-    # @@protoc_insertion_point(class_scope:ymir.backend.RespCMDInference.ImageAnnotationsEntry)
+    # @@protoc_insertion_point(class_scope:ymir.controller.RespCMDInference.ImageAnnotationsEntry)
     })
   ,
   'DESCRIPTOR' : _RESPCMDINFERENCE,
   '__module__' : 'backend_pb2'
-  # @@protoc_insertion_point(class_scope:ymir.backend.RespCMDInference)
+  # @@protoc_insertion_point(class_scope:ymir.controller.RespCMDInference)
   })
 _sym_db.RegisterMessage(RespCMDInference)
 _sym_db.RegisterMessage(RespCMDInference.ImageAnnotationsEntry)
@@ -1970,21 +1970,21 @@ _sym_db.RegisterMessage(RespCMDInference.ImageAnnotationsEntry)
 SingleImageAnnotations = _reflection.GeneratedProtocolMessageType('SingleImageAnnotations', (_message.Message,), {
   'DESCRIPTOR' : _SINGLEIMAGEANNOTATIONS,
   '__module__' : 'backend_pb2'
-  # @@protoc_insertion_point(class_scope:ymir.backend.SingleImageAnnotations)
+  # @@protoc_insertion_point(class_scope:ymir.controller.SingleImageAnnotations)
   })
 _sym_db.RegisterMessage(SingleImageAnnotations)
 
 Annotation = _reflection.GeneratedProtocolMessageType('Annotation', (_message.Message,), {
   'DESCRIPTOR' : _ANNOTATION,
   '__module__' : 'backend_pb2'
-  # @@protoc_insertion_point(class_scope:ymir.backend.Annotation)
+  # @@protoc_insertion_point(class_scope:ymir.controller.Annotation)
   })
 _sym_db.RegisterMessage(Annotation)
 
 Rect = _reflection.GeneratedProtocolMessageType('Rect', (_message.Message,), {
   'DESCRIPTOR' : _RECT,
   '__module__' : 'backend_pb2'
-  # @@protoc_insertion_point(class_scope:ymir.backend.Rect)
+  # @@protoc_insertion_point(class_scope:ymir.controller.Rect)
   })
 _sym_db.RegisterMessage(Rect)
 
@@ -1993,12 +1993,12 @@ TaskMonitorStorage = _reflection.GeneratedProtocolMessageType('TaskMonitorStorag
   'TasksEntry' : _reflection.GeneratedProtocolMessageType('TasksEntry', (_message.Message,), {
     'DESCRIPTOR' : _TASKMONITORSTORAGE_TASKSENTRY,
     '__module__' : 'backend_pb2'
-    # @@protoc_insertion_point(class_scope:ymir.backend.TaskMonitorStorage.TasksEntry)
+    # @@protoc_insertion_point(class_scope:ymir.controller.TaskMonitorStorage.TasksEntry)
     })
   ,
   'DESCRIPTOR' : _TASKMONITORSTORAGE,
   '__module__' : 'backend_pb2'
-  # @@protoc_insertion_point(class_scope:ymir.backend.TaskMonitorStorage)
+  # @@protoc_insertion_point(class_scope:ymir.controller.TaskMonitorStorage)
   })
 _sym_db.RegisterMessage(TaskMonitorStorage)
 _sym_db.RegisterMessage(TaskMonitorStorage.TasksEntry)
@@ -2006,7 +2006,7 @@ _sym_db.RegisterMessage(TaskMonitorStorage.TasksEntry)
 TaskMonitorStorageItem = _reflection.GeneratedProtocolMessageType('TaskMonitorStorageItem', (_message.Message,), {
   'DESCRIPTOR' : _TASKMONITORSTORAGEITEM,
   '__module__' : 'backend_pb2'
-  # @@protoc_insertion_point(class_scope:ymir.backend.TaskMonitorStorageItem)
+  # @@protoc_insertion_point(class_scope:ymir.controller.TaskMonitorStorageItem)
   })
 _sym_db.RegisterMessage(TaskMonitorStorageItem)
 
@@ -2017,17 +2017,17 @@ _TASKMONITORSTORAGE_TASKSENTRY._options = None
 
 _MIR_CONTROLLER_SERVICE = _descriptor.ServiceDescriptor(
   name='mir_controller_service',
-  full_name='ymir.backend.mir_controller_service',
+  full_name='ymir.controller.mir_controller_service',
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=4641,
-  serialized_end=4743,
+  serialized_start=4731,
+  serialized_end=4839,
   methods=[
   _descriptor.MethodDescriptor(
     name='data_manage_request',
-    full_name='ymir.backend.mir_controller_service.data_manage_request',
+    full_name='ymir.controller.mir_controller_service.data_manage_request',
     index=0,
     containing_service=None,
     input_type=_GENERALREQ,

@@ -11,6 +11,8 @@ from controller.invoker import (
     invoker_cmd_log,
     invoker_cmd_merge,
     invoker_cmd_task_info,
+    invoker_cmd_label_get,
+    invoker_cmd_label_add,
 )
 
 from proto import backend_pb2
@@ -29,4 +31,6 @@ RequestTypeToInvoker = {
     backend_pb2.REPO_CREATE: invoker_cmd_init.InitInvoker,
     backend_pb2.TASK_CREATE: invoker_task_factory.CreateTaskInvokerFactory,
     backend_pb2.TASK_INFO: invoker_cmd_task_info.GetTaskInfoInvoker,
+    backend_pb2.CMD_LABEL_ADD: invoker_cmd_label_add.LabelAddInvoker,
+    backend_pb2.CMD_LABEL_GET: invoker_cmd_label_get.LabelGetInvoker,
 }

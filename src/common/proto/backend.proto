@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package ymir.backend;
+package ymir.controller;
 
 /// assertion type: training, validation or test
 enum TvtType {

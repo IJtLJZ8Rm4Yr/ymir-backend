@@ -15,6 +15,7 @@ def make_cmd_request(user_id: str = None,
                      ex_dataset_ids: List[str] = None,
                      in_class_ids: List[int] = None,
                      ex_class_ids: List[int] = None,
+                     private_labels: List[str] = None,
                      asset_dir: str = None,
                      model_config: str = None,
                      model_hash: str = None,
@@ -45,6 +46,8 @@ def make_cmd_request(user_id: str = None,
         request.in_class_ids[:] = in_class_ids
     if ex_class_ids:
         request.ex_class_ids[:] = ex_class_ids
+    if private_labels:
+        request.private_labels[:] = private_labels
     if force is not None:
         request.force = force
     if commit_message is not None:

@@ -37,6 +37,21 @@ def _build_cmd_create_repo_req(args: Dict) -> backend_pb2.GeneralReq:
                                          req_type=backend_pb2.REPO_CREATE)
 
 
+def _build_cmd_add_labels_req(args: Dict) -> backend_pb2.GeneralReq:
+    return invoker_call.make_cmd_request(user_id=args["user"],
+                                         repo_id=args["repo"],
+                                         task_id=args["tid"],
+
+                                         # private_labels=args['private_labels'],
+                                         req_type=backend_pb2.CMD_LABEL_ADD)
+
+def _build_cmd_get_labels_req(args: Dict) -> backend_pb2.GeneralReq:
+    return invoker_call.make_cmd_request(user_id=args["user"],
+                                         repo_id=args["repo"],
+                                         task_id=args["tid"],
+                                         req_type=backend_pb2.CMD_LABEL_GET)
+
+
 def call_cmd(client: ControllerClient, *, args: Any) -> Optional[str]:
     args = vars(args)
     req_name = "_build_cmd_{}_req".format(args['task_type'])
@@ -153,7 +168,7 @@ def get_parser() -> Any:
     common_group.add_argument(
         "-g",
         "--grpc",
-        default="127.0.0.1:50051",
+        default="192.168.13.107:50066",
         type=str,
         help="grpc channel",
     )
@@ -163,7 +178,7 @@ def get_parser() -> Any:
 
     # CMD CALL
     parser_create_task = sub_parsers.add_parser("cmd_call", help="create sync cmd call")
-    parser_create_task.add_argument("--task_type", choices=["create_repo"], type=str, help="task type")
+    parser_create_task.add_argument("--task_type", choices=["create_repo", "add_labels", "get_labels"], type=str, help="task type")
     parser_create_task.set_defaults(func=call_cmd)
 
     # CREATE TASK
@@ -179,6 +194,7 @@ def get_parser() -> Any:
     parser_create_task.add_argument("--model_hash", type=str, help="model_hash")
     parser_create_task.add_argument("--asset_dir", type=str)
     parser_create_task.add_argument("--annotation_dir", type=str)
+
     parser_create_task.add_argument("--top_k", type=int)
     parser_create_task.add_argument("--expert_instruction_url", type=str)
     parser_create_task.add_argument("--labeler_accounts", nargs="*", type=str)
@@ -189,6 +205,9 @@ def get_parser() -> Any:
     parser_get_task_info = sub_parsers.add_parser("get_task_info", help="checkout the status of given tasks")
     parser_get_task_info.add_argument("--task_ids", nargs="+", help="task ids")
     parser_get_task_info.set_defaults(func=call_check_task_status)
+
+
+
 
     return parser
 
