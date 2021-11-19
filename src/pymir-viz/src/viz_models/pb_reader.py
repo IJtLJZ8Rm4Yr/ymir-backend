@@ -2,11 +2,11 @@ import os
 from typing import List, Dict
 
 from google.protobuf import message as pb_message
-
 from mir.tools import mir_storage_ops
+
+from proto import backend_pb2
 from src import config
 from src.libs import utils
-from proto import backend_pb2
 
 
 class MirStorageLoader:

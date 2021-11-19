@@ -3,13 +3,13 @@ import time
 from typing import List, Dict, Set
 
 import yaml
-from proto import backend_pb2
 
 from controller.config import GPU_LOCKING_SET
 from controller.invoker.invoker_cmd_merge import MergeInvoker
 from controller.invoker.invoker_task_base import TaskBaseInvoker
 from controller.utils import code, utils, invoker_call, revs, gpu_utils, labels
 from controller.utils.redis import rds
+from proto import backend_pb2
 
 
 class TaskTrainingInvoker(TaskBaseInvoker):

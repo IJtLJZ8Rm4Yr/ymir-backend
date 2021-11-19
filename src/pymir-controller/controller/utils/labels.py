@@ -1,7 +1,8 @@
 import csv
 import os
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple, Iterable
+from typing import Dict, List, Iterable
+from controller.config import RESERVE_COLUMN
 
 
 class LabelFileHandler:
@@ -9,9 +10,9 @@ class LabelFileHandler:
     def __init__(self, label_file_dir):
         self.label_file = os.path.join(label_file_dir, "labels.csv")
 
-    def init_label_file(self):
         label_file = Path(self.label_file)
         label_file.touch(exist_ok=True)
+
 
     def get_label_file_path(self):
         return self.label_file
@@ -21,22 +22,22 @@ class LabelFileHandler:
             writer = csv.writer(f)
             writer.writerows(content)
 
-    def _check_name_existed(self, req_main_label, one_name, middle_content: Dict):
-        print(f'_check_name_existed {req_main_label} {one_name} {middle_content}')
+    def _check_name_existed(self, req_main_label, alias, middle_content: Dict):
+        print(f'_check_name_existed {req_main_label} {alias} {middle_content}')
         for main_label, one_label_content in middle_content.items():
             if req_main_label == main_label:
                 continue
-            if one_name in one_label_content["labels"]:
+            if alias in one_label_content["labels"]:
                 return True
 
         return False
 
-    def compare_waited_labels(self, middle_content, waited_labels):
+    def check_candidate_labels(self, middle_content, candidate_labels):
         error_rows = []
-        for one_row in waited_labels:
-            for one_name in one_row[1:]:
-                if self._check_name_existed(one_row[0], one_name, middle_content):
-                    error_rows.append(",".join(one_row))
+        for current_row in candidate_labels:
+            for alias in current_row[1:]:
+                if self._check_name_existed(current_row[0], alias, middle_content):
+                    error_rows.append(",".join(current_row))
 
         return error_rows
 
@@ -47,15 +48,15 @@ class LabelFileHandler:
 
         return writable_content
 
-    def gen_middle_content(self, existed_labels, waited_labels):
+    def gen_middle_content(self, existed_labels, candidate_labels):
         # {"main_label": {"line": 0, "reserve": "", "labels": ["car", "CAR"]}}
         middle_content = dict()
 
         for one_row in existed_labels:
-            middle_content[one_row[1]] = dict(line=one_row[0], reserve=one_row[2], labels=one_row[2:])
+            middle_content[one_row[1]] = dict(line=one_row[0], reserve=one_row[RESERVE_COLUMN], labels=one_row[2:])
 
         auto_type_id = len(existed_labels)
-        for one_row in waited_labels:
+        for one_row in candidate_labels:
             if one_row[0] in middle_content.keys():
                 middle_content[one_row[0]]["labels"] = one_row
             else:
@@ -64,17 +65,17 @@ class LabelFileHandler:
 
         return middle_content
 
-    def format_waited_labels(self, waited_labels):
-        return [waited_label.split(",") for waited_label in waited_labels]
+    def format_candidate_labels(self, candidate_labels):
+        return [candidate_label.split(",") for candidate_label in candidate_labels]
 
-    def add_labels(self, waited_labels):
-        waited_labels_list = self.format_waited_labels(waited_labels)
-        print(f'waited_labels_list: {waited_labels_list}')
+    def add_labels(self, candidate_labels):
+        candidate_labels_list = self.format_candidate_labels(candidate_labels)
+        print(f'candidate_labels_list: {candidate_labels_list}')
         existed_labels = self.get_all_labels()
         print(existed_labels)
-        middle_content = self.gen_middle_content(existed_labels, waited_labels_list)
+        middle_content = self.gen_middle_content(existed_labels, candidate_labels_list)
         print(middle_content)
-        error_rows = self.compare_waited_labels(middle_content, waited_labels_list)
+        error_rows = self.check_candidate_labels(middle_content, candidate_labels_list)
         print(f'error: {error_rows}')
         if error_rows:
             return error_rows
@@ -88,7 +89,7 @@ class LabelFileHandler:
             reader = csv.reader(f)
             for one_row in reader:
                 if not with_reserve:
-                    one_row.pop(1)
+                    one_row.pop(RESERVE_COLUMN)
                 if csv_string:
                     one_row = ",".join(one_row)
                 all_labels.append(one_row)

@@ -2,11 +2,11 @@ import os
 from typing import Dict
 
 import yaml
-from proto import backend_pb2
 
 from controller.invoker.invoker_cmd_merge import MergeInvoker
 from controller.invoker.invoker_task_base import TaskBaseInvoker
 from controller.utils import code, utils, invoker_call
+from proto import backend_pb2
 
 
 class TaskMiningInvoker(TaskBaseInvoker):

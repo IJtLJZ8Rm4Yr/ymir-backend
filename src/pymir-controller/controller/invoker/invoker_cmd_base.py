@@ -3,9 +3,9 @@ import os
 from abc import ABC, abstractmethod
 
 from google.protobuf import json_format
-from proto import backend_pb2
 
 from controller.utils import code, checker
+from proto import backend_pb2
 
 
 class BaseMirControllerInvoker(ABC):

@@ -1,12 +1,10 @@
 import logging
 import re
 import subprocess
-from typing import Tuple
 
 from controller.utils import task_id as task_id_proto
-from proto import backend_pb2
-
 from controller.utils.code import ResCode
+from proto import backend_pb2
 
 
 def mir_executable() -> str:

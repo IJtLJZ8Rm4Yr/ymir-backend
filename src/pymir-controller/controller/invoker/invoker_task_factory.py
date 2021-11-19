@@ -5,10 +5,9 @@ from controller.invoker.invoker_task_copy import TaskCopyInvoker
 from controller.invoker.invoker_task_exporting import TaskExportingInvoker
 from controller.invoker.invoker_task_filter import TaskFilterInvoker
 from controller.invoker.invoker_task_importing import TaskImportingInvoker
+from controller.invoker.invoker_task_labeling import TaskLabelingInvoker
 from controller.invoker.invoker_task_mining import TaskMiningInvoker
 from controller.invoker.invoker_task_training import TaskTrainingInvoker
-from controller.invoker.invoker_task_labeling import TaskLabelingInvoker
-from proto import backend_pb2
 from proto import backend_pb2
 
 

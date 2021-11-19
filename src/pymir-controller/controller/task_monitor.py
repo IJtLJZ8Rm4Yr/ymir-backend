@@ -4,11 +4,10 @@ import os
 from datetime import datetime
 from typing import Any, Callable, Dict, Optional
 
-from google.protobuf import json_format
 import yaml
+from google.protobuf import json_format
 
 from controller.utils import singleton, tasks_util
-from proto import backend_pb2
 from proto import backend_pb2
 
 

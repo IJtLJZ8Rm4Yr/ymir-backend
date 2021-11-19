@@ -1,9 +1,7 @@
-from functools import wraps
 import os
 import threading
-from typing import Any, AnyStr, Callable, Dict
-
-from proto import backend_pb2
+from functools import wraps
+from typing import Any, Callable, Dict
 
 from controller.invoker.invoker_cmd_base import BaseMirControllerInvoker
 from controller.task_monitor import ControllerTaskMonitor

@@ -4,7 +4,6 @@ from typing import Dict
 from controller.invoker.invoker_task_base import TaskBaseInvoker, write_done_progress
 from controller.utils import code, utils
 from proto import backend_pb2
-from proto import backend_pb2
 
 
 class TaskExportingInvoker(TaskBaseInvoker):

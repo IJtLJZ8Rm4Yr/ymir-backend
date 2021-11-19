@@ -1,17 +1,6 @@
-import json
-import os
-import shutil
-from typing import Dict
-
-import yaml
-from PIL import Image
-from google.protobuf import json_format
-from proto import backend_pb2
-
 from controller.invoker.invoker_cmd_base import BaseMirControllerInvoker
 from controller.utils import code, utils, checker, labels
-from controller.utils.app_logger import logger
-from controller.utils.code import ResCode
+from proto import backend_pb2
 
 
 class LabelGetInvoker(BaseMirControllerInvoker):

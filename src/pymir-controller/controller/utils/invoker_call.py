@@ -1,6 +1,5 @@
 from typing import Any, List
 
-from controller.invoker.invoker_cmd_base import BaseMirControllerInvoker
 from proto import backend_pb2
 
 

@@ -1,6 +1,6 @@
-from controller.invoker.invoker_task_base import TaskBaseInvoker, write_done_progress
 from controller.invoker.invoker_cmd_filter import FilterBranchInvoker
 from controller.invoker.invoker_cmd_merge import MergeInvoker
+from controller.invoker.invoker_task_base import TaskBaseInvoker, write_done_progress
 from controller.utils import code, invoker_call, utils
 from proto import backend_pb2
 

@@ -1,7 +1,7 @@
-from enum import auto, IntEnum, unique
 import logging
 import os
 import sys
+from enum import auto, IntEnum, unique
 from typing import List
 
 from controller.utils import code, utils

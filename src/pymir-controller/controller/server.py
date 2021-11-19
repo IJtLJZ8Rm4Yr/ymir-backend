@@ -1,10 +1,9 @@
-from concurrent import futures
-
 import argparse
 import logging
 import os
 import re
 import sys
+from concurrent import futures
 from typing import Any
 
 import grpc

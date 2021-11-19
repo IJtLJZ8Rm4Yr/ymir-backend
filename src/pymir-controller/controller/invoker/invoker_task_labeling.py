@@ -1,11 +1,10 @@
 from typing import Dict
 
 from controller.invoker.invoker_task_base import TaskBaseInvoker
-from controller.utils import code, utils
-from proto import backend_pb2
-
-from controller.utils.labels import LabelFileHandler
 from controller.label_model import label_runner
+from controller.utils import code, utils
+from controller.utils.labels import LabelFileHandler
+from proto import backend_pb2
 
 
 class TaskLabelingInvoker(TaskBaseInvoker):
