@@ -44,7 +44,7 @@ class LabelFileHandler:
     def format_to_writable_content(self, middle_content):
         writable_content = [0] * len(middle_content)
         for _, one_label_content in middle_content.items():
-            writable_content[one_label_content["line"]] = [one_label_content["line"]] + [""] + one_label_content["labels"]
+            writable_content[int(one_label_content["line"])] = [one_label_content["line"]] + [""] + one_label_content["labels"]
 
         return writable_content
 
