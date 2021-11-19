@@ -53,7 +53,7 @@ class LabelFileHandler:
         middle_content = dict()
 
         for one_row in existed_labels:
-            middle_content[one_row[1]] = dict(line=one_row[0], reserve=one_row[RESERVE_COLUMN], labels=one_row[2:])
+            middle_content[one_row[2]] = dict(line=one_row[0], reserve=one_row[RESERVE_COLUMN], labels=one_row[2:])
 
         auto_type_id = len(existed_labels)
         for one_row in candidate_labels:
