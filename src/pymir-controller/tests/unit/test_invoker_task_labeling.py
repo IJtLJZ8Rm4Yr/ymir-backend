@@ -8,6 +8,7 @@ from controller.utils.labels import LabelFileHandler
 from controller.invoker.invoker_task_exporting import TaskExportingInvoker
 from controller.invoker.invoker_task_labeling import TaskLabelingInvoker
 from controller.label_model import label_studio
+from pathlib import Path
 
 
 @pytest.fixture()
@@ -16,6 +17,7 @@ def mock_many(mocker):
     mocker.patch.object(TaskExportingInvoker, "exporting_cmd")
     mocker.patch("builtins.open", mocker.mock_open(read_data="data"))
     mocker.patch("os.listdir", return_value=[])
+    mocker.patch.object(Path, "touch")
     mocker.patch.object(LabelFileHandler, "get_main_labels_by_ids", return_value=["fake"])
 
 

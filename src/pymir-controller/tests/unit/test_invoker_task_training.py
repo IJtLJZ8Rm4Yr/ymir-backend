@@ -6,6 +6,7 @@ import unittest
 import yaml
 from unittest import mock
 from google.protobuf.json_format import MessageToDict, ParseDict
+from controller.utils.labels import LabelFileHandler
 
 from controller.invoker.invoker_task_base import TaskBaseInvoker
 from controller.utils import utils, gpu_utils
@@ -78,6 +79,8 @@ class TestInvokerTaskTraining(unittest.TestCase):
         rds.zadd = mock.Mock()
         rds.zremrangebyscore = mock.Mock()
         gpu_utils.get_gpus_info = mock.Mock(return_value={'0': 0.99, '1': 0.9, '2': 0.89})
+
+        LabelFileHandler.get_main_labels_by_ids = mock.Mock(return_value=["frisbee", "car"])
 
         training_config = {
             'anchors': '12, 16, 19, 36, 40, 28, 36, 75, 76, 55, 72, 146, 142, 110, 192, 243, 459, 401',

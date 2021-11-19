@@ -3,11 +3,10 @@ import os
 import shutil
 import unittest
 from unittest import mock
-
+from controller.utils.labels import LabelFileHandler
 from google.protobuf.json_format import MessageToDict, ParseDict
 
 import tests.utils as test_utils
-from proto import backend_pb2
 from proto import backend_pb2
 
 from controller.utils import utils
@@ -73,6 +72,7 @@ class TestInvokerTaskFilter(unittest.TestCase):
 
     @mock.patch("subprocess.run", side_effect=_mock_run_func)
     def test_invoker_00(self, mock_run):
+        LabelFileHandler.get_main_labels_by_ids = mock.Mock(return_value=["frisbee", "car"])
         filter_request = backend_pb2.TaskReqFilter()
         filter_request.in_dataset_ids[:] = [self._guest_id1, self._guest_id2]
         filter_request.in_class_ids[:] = [0, 1]
@@ -95,7 +95,7 @@ class TestInvokerTaskFilter(unittest.TestCase):
                                                                 self._guest_id1, self._guest_id2))
         expected_cmd_filter = ("cd {0} && mir filter --dst-rev {1}@{1} --src-revs {1}@{2} "
                                "-p '{3}' -P '{4}'".format(self._mir_repo_root, self._task_id, self._sub_task_id,
-                                                          'frisbee;car', 'person'))
+                                                          'frisbee;car', 'frisbee;car'))
         mock_run.assert_has_calls(calls=[
             mock.call(expected_cmd_merge, capture_output=True, shell=True),
             mock.call(expected_cmd_filter, capture_output=True, shell=True),

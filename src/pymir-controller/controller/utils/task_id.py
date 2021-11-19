@@ -11,18 +11,19 @@ class IDProto(IntEnum):
     ID_LEN_USER_ID = 4
     ID_LEN_REPO_ID = 6
     ID_LEN_HEX_TASK_ID = 16
-    ID_LENGTH = (ID_LEN_ID_TYPE + ID_LEN_SUBTASK_ID + ID_LEN_RESERVE + ID_LEN_USER_ID + ID_LEN_REPO_ID +
-                 ID_LEN_HEX_TASK_ID)
+    ID_LENGTH = (
+        ID_LEN_ID_TYPE + ID_LEN_SUBTASK_ID + ID_LEN_RESERVE + ID_LEN_USER_ID + ID_LEN_REPO_ID + ID_LEN_HEX_TASK_ID
+    )
 
 
 @unique
 class IDType(Enum):
-    ID_TYPE_UNKNOWN = 'z'
-    ID_TYPE_ASSET = 'a'
-    ID_TYPE_COMMIT = 'c'
-    ID_TYPE_TASK = 't'
-    ID_TYPE_REPO = 'r'
-    ID_TYPE_USER = 'u'
+    ID_TYPE_UNKNOWN = "z"
+    ID_TYPE_ASSET = "a"
+    ID_TYPE_COMMIT = "c"
+    ID_TYPE_TASK = "t"
+    ID_TYPE_REPO = "r"
+    ID_TYPE_USER = "u"
 
 
 @dataclass
@@ -53,6 +54,6 @@ class TaskId:
 
     @classmethod
     def from_task_id(cls, task_id: str):
-        fmt = '1s1s2s4s6s16s'
+        fmt = "1s1s2s4s6s16s"
         components = struct.unpack(fmt, task_id.encode())
         return cls(*(c.decode() for c in components))
