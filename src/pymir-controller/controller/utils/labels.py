@@ -13,7 +13,6 @@ class LabelFileHandler:
         label_file = Path(self.label_file)
         label_file.touch(exist_ok=True)
 
-
     def get_label_file_path(self):
         return self.label_file
 
@@ -23,7 +22,7 @@ class LabelFileHandler:
             writer.writerows(content)
 
     def _check_name_existed(self, req_main_label, alias, middle_content: Dict):
-        print(f'_check_name_existed {req_main_label} {alias} {middle_content}')
+        print(f"_check_name_existed {req_main_label} {alias} {middle_content}")
         for main_label, one_label_content in middle_content.items():
             if req_main_label == main_label:
                 continue
@@ -44,7 +43,9 @@ class LabelFileHandler:
     def format_to_writable_content(self, middle_content):
         writable_content = [0] * len(middle_content)
         for _, one_label_content in middle_content.items():
-            writable_content[int(one_label_content["line"])] = [one_label_content["line"]] + [""] + one_label_content["labels"]
+            writable_content[int(one_label_content["line"])] = (
+                [one_label_content["line"]] + [""] + one_label_content["labels"]
+            )
 
         return writable_content
 
@@ -66,17 +67,21 @@ class LabelFileHandler:
         return middle_content
 
     def format_candidate_labels(self, candidate_labels):
-        return [candidate_label.split(",") for candidate_label in candidate_labels]
+        result = []
+        for candidate_label in candidate_labels:
+            result.append([name.lower() for name in candidate_label.split(",")])
+
+        return result
 
     def add_labels(self, candidate_labels):
         candidate_labels_list = self.format_candidate_labels(candidate_labels)
-        print(f'candidate_labels_list: {candidate_labels_list}')
+        print(f"candidate_labels_list: {candidate_labels_list}")
         existed_labels = self.get_all_labels()
         print(existed_labels)
         middle_content = self.gen_middle_content(existed_labels, candidate_labels_list)
         print(middle_content)
         error_rows = self.check_candidate_labels(middle_content, candidate_labels_list)
-        print(f'error: {error_rows}')
+        print(f"error: {error_rows}")
         if error_rows:
             return error_rows
 
