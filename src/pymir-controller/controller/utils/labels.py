@@ -51,7 +51,7 @@ class LabelFileHandler:
 
         return False
 
-    def check_candidate_labels(self, middle_content: Dict, candidate_labels: List) -> Optional[List]:
+    def check_candidate_labels(self, middle_content: Dict, candidate_labels: List) -> Optional[List[str]]:
         error_rows = []
         for current_row in candidate_labels:
             for alias in current_row[1:]:
@@ -71,27 +71,25 @@ class LabelFileHandler:
         return writable_content
 
     @staticmethod
-    def format_candidate_labels(candidate_labels: List[str]) -> List[List]:
+    def format_candidate_labels(candidate_labels: List[str]) -> List[List[str]]:
         result = []
         for candidate_label in candidate_labels:
             result.append([name.lower() for name in candidate_label.split(",")])
 
         return result
 
-    def get_all_labels(self, with_reserve: bool = True, csv_string: bool = False) -> List:
+    def get_all_labels(self, with_reserve: bool = True) -> List[List]:
         all_labels = []
         with open(self.label_file) as f:
             reader = csv.reader(f)
             for one_row in reader:
                 if not with_reserve:
                     one_row.pop(RESERVE_COLUMN)
-                if csv_string:
-                    one_row = ",".join(one_row)  # type: ignore
                 all_labels.append(one_row)
 
         return all_labels
 
-    def add_labels(self, candidate_labels: List[str]) -> Optional[List]:
+    def add_labels(self, candidate_labels: List[str]) -> Optional[List[str]]:
         candidate_labels_list = self.format_candidate_labels(candidate_labels)
         logger.info(f"candidate_labels_list: {candidate_labels_list}")
         existed_labels = self.get_all_labels()
@@ -106,7 +104,7 @@ class LabelFileHandler:
             self.write_label_file(writable_content)
             return None
 
-    def get_main_labels_by_ids(self, type_ids: Iterable) -> List:
+    def get_main_labels_by_ids(self, type_ids: Iterable) -> List[str]:
         with open(self.label_file) as f:
             reader = csv.reader(f)
             all_main_names = [one_row[2] for one_row in reader]
