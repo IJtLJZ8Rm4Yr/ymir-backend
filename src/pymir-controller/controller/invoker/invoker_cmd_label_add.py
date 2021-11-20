@@ -1,6 +1,5 @@
 from controller.invoker.invoker_cmd_base import BaseMirControllerInvoker
 from controller.utils import code, utils, checker, labels
-from controller.utils.code import ResCode
 from proto import backend_pb2
 
 
@@ -13,7 +12,6 @@ class LabelAddInvoker(BaseMirControllerInvoker):
         )
 
     def invoke(self) -> backend_pb2.GeneralResp:
-        print('in add----------------------------------')
         label_handler = labels.LabelFileHandler(self._user_root)
         error_rows = label_handler.add_labels(self._request.private_labels)
 

@@ -2,6 +2,7 @@ import struct
 
 from dataclasses import dataclass
 from enum import Enum, IntEnum, unique
+from typing import Any
 
 
 class IDProto(IntEnum):
@@ -35,7 +36,7 @@ class TaskId:
     repo_id: str
     hex_task_id: str
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         if len(self.id_type) != IDProto.ID_LEN_ID_TYPE:
             raise ValueError(f"Invalid id_type: {self.id_type}")
         if len(self.sub_task_id) != IDProto.ID_LEN_SUBTASK_ID:
@@ -49,11 +50,11 @@ class TaskId:
         if len(self.hex_task_id) != IDProto.ID_LEN_HEX_TASK_ID:
             raise ValueError(f"Invalid hex_task_id: {self.hex_task_id}")
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.id_type}{self.sub_task_id}{self.id_reserve}{self.user_id}{self.repo_id}{self.hex_task_id}"
 
     @classmethod
-    def from_task_id(cls, task_id: str):
+    def from_task_id(cls, task_id: str) -> Any:
         fmt = "1s1s2s4s6s16s"
         components = struct.unpack(fmt, task_id.encode())
         return cls(*(c.decode() for c in components))
