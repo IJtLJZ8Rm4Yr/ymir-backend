@@ -1,8 +1,8 @@
 import argparse
-import os
 import logging
-from typing import Any, Dict, List, Optional
+import os
 import sys
+from typing import Any, Dict, List, Optional
 
 import grpc
 from google.protobuf import json_format
@@ -10,7 +10,6 @@ from google.protobuf import json_format
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
 from controller.utils import invoker_call, revs
-from proto import backend_pb2
 from proto import backend_pb2
 from proto import backend_pb2_grpc
 
@@ -41,8 +40,6 @@ def _build_cmd_add_labels_req(args: Dict) -> backend_pb2.GeneralReq:
     return invoker_call.make_cmd_request(user_id=args["user"],
                                          repo_id=args["repo"],
                                          task_id=args["tid"],
-
-                                         # private_labels=args['private_labels'],
                                          req_type=backend_pb2.CMD_LABEL_ADD)
 
 def _build_cmd_get_labels_req(args: Dict) -> backend_pb2.GeneralReq:
@@ -168,7 +165,7 @@ def get_parser() -> Any:
     common_group.add_argument(
         "-g",
         "--grpc",
-        default="192.168.13.107:50066",
+        default="127.0.0.1:50066",
         type=str,
         help="grpc channel",
     )
@@ -194,7 +191,6 @@ def get_parser() -> Any:
     parser_create_task.add_argument("--model_hash", type=str, help="model_hash")
     parser_create_task.add_argument("--asset_dir", type=str)
     parser_create_task.add_argument("--annotation_dir", type=str)
-
     parser_create_task.add_argument("--top_k", type=int)
     parser_create_task.add_argument("--expert_instruction_url", type=str)
     parser_create_task.add_argument("--labeler_accounts", nargs="*", type=str)
@@ -205,9 +201,6 @@ def get_parser() -> Any:
     parser_get_task_info = sub_parsers.add_parser("get_task_info", help="checkout the status of given tasks")
     parser_get_task_info.add_argument("--task_ids", nargs="+", help="task ids")
     parser_get_task_info.set_defaults(func=call_check_task_status)
-
-
-
 
     return parser
 

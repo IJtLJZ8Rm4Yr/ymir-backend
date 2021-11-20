@@ -9,6 +9,7 @@ from controller.utils.app_logger import logger
 
 class LabelFileHandler:
     # csv file: type_id, reserve, main_label, alias_label_1, xxx
+    # middle_content: {"main_label": {"line": 0, "reserve": "", "labels": ["main_lable", "alias1", "alias2"]}}
     def __init__(self, label_file_dir: str) -> None:
         self.label_file = os.path.join(label_file_dir, "labels.csv")
 
@@ -35,13 +36,13 @@ class LabelFileHandler:
 
         return middle_content
 
-    def _write_label_file(self, content: List[List]) -> None:
+    def write_label_file(self, content: List[List]) -> None:
         with open(self.label_file, "w",) as f:
             writer = csv.writer(f)
             writer.writerows(content)
 
     @staticmethod
-    def _check_name_existed(req_main_label: str, alias: str, middle_content: Dict) -> bool:
+    def check_name_existed(req_main_label: str, alias: str, middle_content: Dict) -> bool:
         for main_label, one_label_content in middle_content.items():
             if req_main_label == main_label:
                 continue
@@ -54,7 +55,7 @@ class LabelFileHandler:
         error_rows = []
         for current_row in candidate_labels:
             for alias in current_row[1:]:
-                if self._check_name_existed(current_row[0], alias, middle_content):
+                if self.check_name_existed(current_row[0], alias, middle_content):
                     error_rows.append(",".join(current_row))
 
         return error_rows
@@ -102,13 +103,20 @@ class LabelFileHandler:
             return error_rows
         else:
             writable_content = self.format_to_writable_content(middle_content)
-            self._write_label_file(writable_content)
+            self.write_label_file(writable_content)
             return None
 
     def get_main_labels_by_ids(self, type_ids: Iterable) -> List:
         with open(self.label_file) as f:
             reader = csv.reader(f)
             all_main_names = [one_row[2] for one_row in reader]
-        main_names = [all_main_names[int(type_id)] for type_id in type_ids]
+
+        main_names = []
+        for type_id in type_ids:
+            type_id = int(type_id)
+            if type_id >= len(all_main_names):
+                raise ValueError(f"get_main_labels_by_ids input type_ids error: {type_ids}")
+            else:
+                main_names.append(all_main_names[type_id])
 
         return main_names

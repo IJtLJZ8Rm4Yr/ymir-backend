@@ -22,7 +22,6 @@ class InitInvoker(BaseMirControllerInvoker):
         if self._request.req_type not in [backend_pb2.CMD_INIT, backend_pb2.REPO_CREATE]:
             raise RuntimeError("Mismatched req_type")
 
-        # os.makedirs(self._user_root, exist_ok=True)
         repo_path = pathlib.Path(self._repo_root)
         repo_path.mkdir(parents=True, exist_ok=True)
 

@@ -3,19 +3,18 @@ import logging
 import os
 import shutil
 import unittest
-import yaml
 from unittest import mock
-from google.protobuf.json_format import MessageToDict, ParseDict
-from controller.utils.labels import LabelFileHandler
 
-from controller.invoker.invoker_task_base import TaskBaseInvoker
+import yaml
+from google.protobuf.json_format import MessageToDict, ParseDict
+
+import tests.utils as test_utils
 from controller.utils import utils, gpu_utils
 from controller.utils.invoker_call import make_invoker_cmd_call
 from controller.utils.invoker_mapping import RequestTypeToInvoker
-import tests.utils as test_utils
-from proto import backend_pb2
-from proto import backend_pb2
+from controller.utils.labels import LabelFileHandler
 from controller.utils.redis import rds
+from proto import backend_pb2
 
 RET_ID = 'commit t000aaaabbbbbbzzzzzzzzzzzzzzz3\nabc'
 

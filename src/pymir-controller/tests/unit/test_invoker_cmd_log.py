@@ -6,11 +6,10 @@ from unittest import mock
 
 from google.protobuf.json_format import MessageToDict, ParseDict
 
-from proto import backend_pb2
+import tests.utils as test_utils
 from controller.utils.invoker_call import make_invoker_cmd_call
 from controller.utils.invoker_mapping import RequestTypeToInvoker
-
-import tests.utils as test_utils
+from proto import backend_pb2
 
 RET_ID = 'commit c6ccc144ef6249519a21c9b29b6c074bff4e81f3\nabc'
 

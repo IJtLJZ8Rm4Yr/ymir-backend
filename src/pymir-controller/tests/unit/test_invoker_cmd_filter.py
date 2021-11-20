@@ -3,14 +3,14 @@ import os
 import shutil
 import unittest
 from unittest import mock
-from controller.utils.labels import LabelFileHandler
+
 from google.protobuf.json_format import MessageToDict, ParseDict
 
-from proto import backend_pb2
+import tests.utils as test_utils
 from controller.utils.invoker_call import make_invoker_cmd_call
 from controller.utils.invoker_mapping import RequestTypeToInvoker
-
-import tests.utils as test_utils
+from controller.utils.labels import LabelFileHandler
+from proto import backend_pb2
 
 RET_ID = 'commit t000aaaabbbbbbzzzzzzzzzzzzzzz3\nabc'
 

@@ -1,14 +1,14 @@
 import json
 import os
+from pathlib import Path
 
 import pytest
 import requests
-from controller.utils.labels import LabelFileHandler
 
 from controller.invoker.invoker_task_exporting import TaskExportingInvoker
 from controller.invoker.invoker_task_labeling import TaskLabelingInvoker
 from controller.label_model import label_studio
-from pathlib import Path
+from controller.utils.labels import LabelFileHandler
 
 
 @pytest.fixture()
