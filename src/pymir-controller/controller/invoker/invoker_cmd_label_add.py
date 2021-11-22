@@ -16,7 +16,8 @@ class LabelAddInvoker(BaseMirControllerInvoker):
         label_handler = labels.LabelFileHandler(self._user_root)
         error_rows = label_handler.add_labels(self._request.private_labels)
         if error_rows:
-            response.csv_labels.extend(error_rows)
+            csv_labels = [",".join(current_row) for current_row in error_rows]
+            response.csv_labels.extend(csv_labels)
 
         return response
 

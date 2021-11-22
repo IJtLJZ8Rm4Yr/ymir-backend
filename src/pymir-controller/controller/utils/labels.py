@@ -51,17 +51,16 @@ class LabelFileHandler:
 
         return False
 
-    def check_candidate_labels(self, middle_content: Dict, candidate_labels: List) -> Optional[List[str]]:
+    def check_candidate_labels(self, middle_content: Dict, candidate_labels: List) -> Optional[List[List]]:
         error_rows = []
         for current_row in candidate_labels:
             for alias in current_row[1:]:
                 if self.check_name_existed(current_row[0], alias, middle_content):
-                    error_rows.append(",".join(current_row))
+                    error_rows.append(current_row)
 
         return error_rows
 
-    @staticmethod
-    def format_to_writable_content(middle_content: Dict) -> List[List]:
+    def _format_to_writable_content(self, middle_content: Dict) -> List[List]:
         writable_content = [[]] * len(middle_content)  # type: ignore
         for _, one_label_content in middle_content.items():
             writable_content[int(one_label_content["line"])] = (
@@ -74,7 +73,8 @@ class LabelFileHandler:
     def format_candidate_labels(candidate_labels: List[str]) -> List[List[str]]:
         result = []
         for candidate_label in candidate_labels:
-            result.append([name.lower() for name in candidate_label.split(",")])
+            candidate_label = candidate_label.lower()
+            result.append(candidate_label.split(","))
 
         return result
 
@@ -89,7 +89,7 @@ class LabelFileHandler:
 
         return all_labels
 
-    def add_labels(self, candidate_labels: List[str]) -> Optional[List[str]]:
+    def add_labels(self, candidate_labels: List[str]) -> Optional[List[List]]:
         candidate_labels_list = self.format_candidate_labels(candidate_labels)
         logger.info(f"candidate_labels_list: {candidate_labels_list}")
         existed_labels = self.get_all_labels()
@@ -100,9 +100,9 @@ class LabelFileHandler:
             logger.info(f"error_rows: {error_rows}")
             return error_rows
         else:
-            writable_content = self.format_to_writable_content(middle_content)
+            writable_content = self._format_to_writable_content(middle_content)
             self.write_label_file(writable_content)
-            return None
+            return error_rows
 
     def get_main_labels_by_ids(self, type_ids: Iterable) -> List[str]:
         with open(self.label_file) as f:
