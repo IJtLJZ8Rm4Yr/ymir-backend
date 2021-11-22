@@ -14,9 +14,10 @@ class LabelAddInvoker(BaseMirControllerInvoker):
     def invoke(self) -> backend_pb2.GeneralResp:
         response = utils.make_general_response(code.ResCode.CTR_OK, "")
         label_handler = labels.LabelFileHandler(self._user_root)
-        error_rows = label_handler.add_labels(self._request.private_labels)
-        if error_rows:
-            csv_labels = [",".join(current_row) for current_row in error_rows]
+        conflict_rows = label_handler.merge_labels(self._request.private_labels, self._request.check_only)
+
+        if conflict_rows:
+            csv_labels = [",".join(current_row) for current_row in conflict_rows]
             response.csv_labels.extend(csv_labels)
 
         return response
