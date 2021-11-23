@@ -31,7 +31,6 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
     def get_multi_by_ids(self, db: Session, *, ids: List[int]) -> List[ModelType]:
         return db.query(self.model).filter(self.model.id.in_(ids)).all()  # type: ignore
 
-<<<<<<< HEAD
     def get_by_user_and_id(
         self, db: Session, *, user_id: int, id: Any
     ) -> Optional[ModelType]:
