@@ -51,6 +51,7 @@ class TaskMiningInvoker(TaskBaseInvoker):
             dst_task_id=request.task_id,
             in_dataset_ids=mining_request.in_dataset_ids,
             ex_dataset_ids=mining_request.ex_dataset_ids,
+            merge_strategy=request.merge_strategy,
         )
         if merge_response.code != code.ResCode.CTR_OK:
             return merge_response
@@ -72,7 +73,8 @@ class TaskMiningInvoker(TaskBaseInvoker):
                                          model_hash=mining_request.model_hash,
                                          his_rev=sub_task_id_1,
                                          in_src_revs=request.task_id,
-                                         executor=mining_image)
+                                         executor=mining_image,
+                                         executor_name=request.executor_name)
 
         return mining_response
 
@@ -91,11 +93,13 @@ class TaskMiningInvoker(TaskBaseInvoker):
         in_src_revs: str,
         asset_cache_dir: str,
         executor: str,
+        executor_name: str,
     ) -> backend_pb2.GeneralResp:
         mining_cmd = (f"cd {repo_root} && {utils.mir_executable()} mining --dst-rev {task_id}@{task_id} "
                       f"-w {work_dir} --model-location {model_location} --media-location {media_location} "
                       f"--topk {top_k} --model-hash {model_hash} --src-revs {in_src_revs}@{his_rev} "
-                      f"--cache {asset_cache_dir} --config-file {config_file} --executor {executor}")
+                      f"--cache {asset_cache_dir} --config-file {config_file} --executor {executor} "
+                      f"--executor-name {executor_name}")
 
         return utils.run_command(mining_cmd)
 
