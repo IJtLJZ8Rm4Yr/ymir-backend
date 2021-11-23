@@ -61,7 +61,6 @@ class TaskMiningInvoker(TaskBaseInvoker):
         mining_image = assets_config["mining_image"]
         config_file = cls.gen_mining_config(mining_request.mining_config, working_dir)
         asset_cache_dir = os.path.join(sandbox_root, request.user_id, "mining_assset_cache")
-        print(f'------------------------{request.executor_name}')
         mining_response = cls.mining_cmd(repo_root=repo_root,
                                          config_file=config_file,
                                          task_id=sub_task_id_0,
@@ -100,8 +99,6 @@ class TaskMiningInvoker(TaskBaseInvoker):
                       f"--topk {top_k} --model-hash {model_hash} --src-revs {in_src_revs}@{his_rev} "
                       f"--cache {asset_cache_dir} --config-file {config_file} --executor {executor} "
                       f"--executor-name {executor_name}")
-
-        print(f'++++++++++++++++{mining_cmd}')
 
         return utils.run_command(mining_cmd)
 
