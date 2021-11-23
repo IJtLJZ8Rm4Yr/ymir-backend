@@ -8,7 +8,7 @@ class LabelGetInvoker(BaseMirControllerInvoker):
     def pre_invoke(self) -> backend_pb2.GeneralResp:
         return checker.check_request(
             request=self._request,
-            prerequisites=[checker.Prerequisites.CHECK_USER_ID, checker.Prerequisites.CHECK_REPO_ID],
+            prerequisites=[checker.Prerequisites.CHECK_USER_ID],
             mir_root=self._repo_root,
         )
 
@@ -27,4 +27,4 @@ class LabelGetInvoker(BaseMirControllerInvoker):
         return self.generate_response(all_labels)
 
     def _repr(self) -> str:
-        return f"cmd_labels_add: user: {self._request.user_id}, task_id: {self._task_id} "
+        return f"cmd_labels_get: user: {self._request.user_id}, task_id: {self._task_id} "

@@ -10,16 +10,23 @@ from controller.utils.app_logger import logger
 class LabelFileHandler:
     # csv file: type_id, reserve, main_label, alias_label_1, xxx
     def __init__(self, label_file_dir: str) -> None:
-        self.label_file = os.path.join(label_file_dir, "labels.csv")
+        self._label_file = os.path.join(label_file_dir, "labels.csv")
 
-        label_file = Path(self.label_file)
+        label_file = Path(self._label_file)
         label_file.touch(exist_ok=True)
 
     def get_label_file_path(self) -> str:
-        return self.label_file
+        return self._label_file
 
     def write_label_file(self, content: List[List[str]], add_preserve: bool = False, add_id: bool = False) -> None:
-        with open(self.label_file, "w",) as f:
+        """write_label_file function
+        This function is used to store label content into a csv file.
+        Args:
+            content (List[List[str]]): content to be written, list of row of strings.
+            add_preserve(bool): add preserve position if True, used when raw content is passed in.
+            add_id: add id position if Ture, used for auto-generated ids.
+        """
+        with open(self._label_file, "w", newline='') as f:
             writer = csv.writer(f)
             for idx, row in enumerate(content):
                 if add_id:
@@ -29,9 +36,20 @@ class LabelFileHandler:
                 writer.writerow(row)
 
     def get_all_labels(self, with_reserve: bool = True, with_id: bool = True) -> List[List[str]]:
+        """
+        get all labels from labels.csv
+
+        Args:
+            with_reserve (bool): if true, returns preserve arg in each line
+            with_id: if true, returns type id (as str) in each line
+
+        Returns:
+            all labels, one element for each line
+            type_id (if with_id), preserved (if with_reserve), main name, alias...
+        """
         all_labels, expected_id, = [], 0
         labels_set, labels_cnt = set(), 0
-        with open(self.label_file) as f:
+        with open(self._label_file, newline='') as f:
             reader = csv.reader(f)
             for record in reader:
                 cur_labels = [label.lower() for label in record]
@@ -64,12 +82,12 @@ class LabelFileHandler:
             return candidate_labels_list
 
         existed_labels_without_id = self.get_all_labels(with_reserve=False, with_id=False)
-        existed_main_names = [row[0] for row in existed_labels_without_id]
+        existed_main_names_to_ids = {row[0]: idx for idx, row in enumerate(existed_labels_without_id)}
 
         candidate_labels_list_new = []
         for candidate_list in candidate_labels_list:
-            if candidate_list[0] in existed_main_names:  # update alias
-                idx = existed_main_names.index(candidate_list[0])
+            if candidate_list[0] in existed_main_names_to_ids:  # update alias
+                idx = existed_main_names_to_ids[candidate_list[0]]
                 existed_labels_without_id[idx] = candidate_list
             else:  # new main_names
                 candidate_labels_list_new.append(candidate_list)
@@ -92,7 +110,7 @@ class LabelFileHandler:
         return conflict_labels
 
     def get_main_labels_by_ids(self, type_ids: Iterable) -> List[str]:
-        with open(self.label_file) as f:
+        with open(self._label_file, newline='') as f:
             reader = csv.reader(f)
             all_main_names = [one_row[2] for one_row in reader]
 

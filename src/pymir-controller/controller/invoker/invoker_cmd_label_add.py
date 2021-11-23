@@ -7,7 +7,7 @@ class LabelAddInvoker(BaseMirControllerInvoker):
     def pre_invoke(self) -> backend_pb2.GeneralResp:
         return checker.check_request(
             request=self._request,
-            prerequisites=[checker.Prerequisites.CHECK_USER_ID, checker.Prerequisites.CHECK_REPO_ID],
+            prerequisites=[checker.Prerequisites.CHECK_USER_ID],
             mir_root=self._repo_root,
         )
 
