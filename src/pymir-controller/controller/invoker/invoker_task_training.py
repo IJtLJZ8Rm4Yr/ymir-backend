@@ -97,6 +97,7 @@ class TaskTrainingInvoker(TaskBaseInvoker):
             his_task_id=train_request.in_dataset_types[0].dataset_id,
             dst_task_id=request.task_id,
             in_dataset_ids=in_dataset_ids,
+            merge_strategy=request.merge_strategy,
         )
         if merge_response.code != code.ResCode.CTR_OK:
             return merge_response

@@ -21,6 +21,7 @@ def make_cmd_request(user_id: str = None,
                      force: bool = None,
                      commit_message: str = None,
                      executor_name: str = None,
+                     merge_strategy: str = None,
                      req_create_task: backend_pb2.ReqCreateTask = None,
                      task_info_req: backend_pb2.ReqGetTaskInfo = None) -> backend_pb2.GeneralReq:
     request = backend_pb2.GeneralReq()
@@ -64,6 +65,8 @@ def make_cmd_request(user_id: str = None,
         request.req_get_task_info.CopyFrom(task_info_req)
     if executor_name is not None:
         request.executor_name = executor_name
+    if merge_strategy is not None:
+        request.merge_strategy = merge_strategy
     return request
 
 
@@ -86,7 +89,8 @@ def make_invoker_cmd_call(invoker: Any,
                           commit_message: str = None,
                           req_create_task: backend_pb2.ReqCreateTask = None,
                           task_info_req: backend_pb2.ReqGetTaskInfo = None,
-                          async_mode: bool = False) -> backend_pb2.GeneralReq:
+                          async_mode: bool = False,
+                          merge_strategy: str = None) -> backend_pb2.GeneralReq:
     request = make_cmd_request(req_type=req_type,
                                user_id=user_id,
                                repo_id=repo_id,
@@ -102,6 +106,7 @@ def make_invoker_cmd_call(invoker: Any,
                                commit_message=commit_message,
                                req_create_task=req_create_task,
                                task_info_req=task_info_req,
-                               executor_name=executor_name)
+                               executor_name=executor_name,
+                               merge_strategy=merge_strategy)
     invoker = invoker(sandbox_root=sandbox_root, request=request, assets_config=assets_config, async_mode=async_mode)
     return invoker.server_invoke()

@@ -108,7 +108,8 @@ class TestInvokerTaskMining(unittest.TestCase):
                                          repo_id=self._mir_repo_name,
                                          task_id=self._task_id,
                                          req_create_task=req_create_task,
-                                         executor_name='executor_name')
+                                         executor_name='executor_name',
+                                         merge_strategy='host')
         print(MessageToDict(response))
 
         expected_cmd_merge = ("cd {0} && mir merge --dst-rev {1}@{2} -s host "

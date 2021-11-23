@@ -51,6 +51,7 @@ class TaskMiningInvoker(TaskBaseInvoker):
             dst_task_id=request.task_id,
             in_dataset_ids=mining_request.in_dataset_ids,
             ex_dataset_ids=mining_request.ex_dataset_ids,
+            merge_strategy=request.merge_strategy,
         )
         if merge_response.code != code.ResCode.CTR_OK:
             return merge_response

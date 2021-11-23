@@ -115,6 +115,7 @@ message GeneralReq {
     repeated string private_labels = 17;
     bool check_only=18;
     string executor_name = 19;
+    string merge_strategy = 20;
     ReqCreateTask req_create_task = 1001;
     ReqGetTaskInfo req_get_task_info = 1002;
 }
