@@ -90,7 +90,7 @@ class TestInvokerTaskFilter(unittest.TestCase):
                                          req_create_task=req_create_task)
         print(MessageToDict(response))
 
-        expected_cmd_merge = ("cd {0} && mir merge --dst-rev {1}@{2} -s stop "
+        expected_cmd_merge = ("cd {0} && mir merge --dst-rev {1}@{2} -s host "
                               "--src-revs '{3}@{3};{4}'".format(self._mir_repo_root, self._task_id, self._sub_task_id,
                                                                 self._guest_id1, self._guest_id2))
         expected_cmd_filter = ("cd {0} && mir filter --dst-rev {1}@{1} --src-revs {1}@{2} "

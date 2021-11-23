@@ -61,6 +61,7 @@ class TaskMiningInvoker(TaskBaseInvoker):
         mining_image = assets_config["mining_image"]
         config_file = cls.gen_mining_config(mining_request.mining_config, working_dir)
         asset_cache_dir = os.path.join(sandbox_root, request.user_id, "mining_assset_cache")
+        print(f'------------------------{request.executor_name}')
         mining_response = cls.mining_cmd(repo_root=repo_root,
                                          config_file=config_file,
                                          task_id=sub_task_id_0,
@@ -72,7 +73,8 @@ class TaskMiningInvoker(TaskBaseInvoker):
                                          model_hash=mining_request.model_hash,
                                          his_rev=sub_task_id_1,
                                          in_src_revs=request.task_id,
-                                         executor=mining_image)
+                                         executor=mining_image,
+                                         executor_name=request.executor_name)
 
         return mining_response
 
@@ -91,11 +93,15 @@ class TaskMiningInvoker(TaskBaseInvoker):
         in_src_revs: str,
         asset_cache_dir: str,
         executor: str,
+        executor_name: str,
     ) -> backend_pb2.GeneralResp:
         mining_cmd = (f"cd {repo_root} && {utils.mir_executable()} mining --dst-rev {task_id}@{task_id} "
                       f"-w {work_dir} --model-location {model_location} --media-location {media_location} "
                       f"--topk {top_k} --model-hash {model_hash} --src-revs {in_src_revs}@{his_rev} "
-                      f"--cache {asset_cache_dir} --config-file {config_file} --executor {executor}")
+                      f"--cache {asset_cache_dir} --config-file {config_file} --executor {executor} "
+                      f"--executor-name {executor_name}")
+
+        print(f'++++++++++++++++{mining_cmd}')
 
         return utils.run_command(mining_cmd)
 

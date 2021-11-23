@@ -73,6 +73,7 @@ enum RequestType {
     CMD_INFERENCE = 11;
     CMD_LABEL_ADD = 12;
     CMD_LABEL_GET = 13;
+    CMD_KILL = 14;
 
     // Sandbox path operation
     USER_LIST = 101;
@@ -113,6 +114,7 @@ message GeneralReq {
     string model_config = 16;
     repeated string private_labels = 17;
     bool check_only=18;
+    string executor_name = 19;
     ReqCreateTask req_create_task = 1001;
     ReqGetTaskInfo req_get_task_info = 1002;
 }
@@ -173,6 +175,7 @@ message TaskReqImporting {
     string asset_dir = 1;
     // single pascal xml per asset, same base_filename as in asset-folder
     string annotation_dir = 2;
+    bool name_strategy_ignore = 3;
 }
 
 message TaskReqExporting {

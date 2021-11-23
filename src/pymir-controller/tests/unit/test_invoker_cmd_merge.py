@@ -82,7 +82,7 @@ class TestInvokerMerge(unittest.TestCase):
                                          ex_dataset_ids=[self._guest_id3])
         print(MessageToDict(response))
 
-        expected_cmd = ("cd {0} && mir merge --dst-rev {1}@{2} -s stop "
+        expected_cmd = ("cd {0} && mir merge --dst-rev {1}@{2} -s host "
                         "--src-revs '{3}@{3};{4}' --ex-src-revs '{5}'".format(self._mir_repo_root, self._dst_task_id,
                                                                               self._task_id, self._guest_id1,
                                                                               self._guest_id2, self._guest_id3))

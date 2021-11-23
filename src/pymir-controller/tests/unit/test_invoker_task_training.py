@@ -125,10 +125,11 @@ class TestInvokerTaskTraining(unittest.TestCase):
                                          user_id=self._user_name,
                                          repo_id=self._mir_repo_name,
                                          task_id=self._task_id,
-                                         req_create_task=req_create_task)
+                                         req_create_task=req_create_task,
+                                         executor_name='executor_name')
         print(MessageToDict(response))
 
-        expected_cmd_merge = ("cd {0} && mir merge --dst-rev {1}@{2} -s stop "
+        expected_cmd_merge = ("cd {0} && mir merge --dst-rev {1}@{2} -s host "
                               "--src-revs 'tr:{3}@{3};va:{4}'".format(self._mir_repo_root, self._task_id,
                                                                       self._sub_task_id, self._guest_id1,
                                                                       self._guest_id2))
@@ -145,7 +146,8 @@ class TestInvokerTaskTraining(unittest.TestCase):
         self.assertDictEqual(training_config, config)
 
         training_cmd = ("cd {0} && mir train --dst-rev {1}@{1} --model-location {2} "
-                        "--media-location {2} -w {3} --src-revs {1}@{4} --config-file {5} --executor {6}".format(
+                        "--media-location {2} -w {3} --src-revs {1}@{4} --config-file {5} --executor {6} "
+                        "--executor-name executor_name".format(
                             self._mir_repo_root, self._task_id, self._storage_root, working_dir, self._sub_task_id,
                             output_config, training_image))
         mock_run.assert_has_calls(calls=[

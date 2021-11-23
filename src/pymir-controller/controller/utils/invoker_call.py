@@ -20,6 +20,7 @@ def make_cmd_request(user_id: str = None,
                      model_hash: str = None,
                      force: bool = None,
                      commit_message: str = None,
+                     executor_name: str = None,
                      req_create_task: backend_pb2.ReqCreateTask = None,
                      task_info_req: backend_pb2.ReqGetTaskInfo = None) -> backend_pb2.GeneralReq:
     request = backend_pb2.GeneralReq()
@@ -61,6 +62,8 @@ def make_cmd_request(user_id: str = None,
         request.req_create_task.CopyFrom(req_create_task)
     if task_info_req is not None:
         request.req_get_task_info.CopyFrom(task_info_req)
+    if executor_name is not None:
+        request.executor_name = executor_name
     return request
 
 
@@ -71,6 +74,7 @@ def make_invoker_cmd_call(invoker: Any,
                           user_id: str = None,
                           repo_id: str = None,
                           task_id: str = None,
+                          executor_name: str = None,
                           singleton_op: str = None,
                           his_task_id: str = None,
                           dst_task_id: str = None,
@@ -97,6 +101,7 @@ def make_invoker_cmd_call(invoker: Any,
                                force=force,
                                commit_message=commit_message,
                                req_create_task=req_create_task,
-                               task_info_req=task_info_req)
+                               task_info_req=task_info_req,
+                               executor_name=executor_name)
     invoker = invoker(sandbox_root=sandbox_root, request=request, assets_config=assets_config, async_mode=async_mode)
     return invoker.server_invoke()
