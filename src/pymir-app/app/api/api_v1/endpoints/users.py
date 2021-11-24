@@ -103,7 +103,7 @@ def update_myself(
         user_in.phone = phone
     if avatar:
         user_in.avatar = avatar
-    user = crud.user.update(db, db_obj=user, obj_in=user_in)
+    user = crud.user.update(db, db_obj=current_user, obj_in=user_in)
     return {"result": user}
 
 
