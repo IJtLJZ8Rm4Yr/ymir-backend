@@ -25,7 +25,7 @@ class MergeInvoker(BaseMirControllerInvoker):
         command = "cd {0} && {1} merge --dst-rev {2} -s {3}".format(
             self._repo_root, utils.mir_executable(),
             revs.join_tvt_branch_tid(branch_id=self._request.dst_task_id, tid=self._task_id),
-            self._request.merge_strategy)
+            backend_pb2.MERGE_STRATEGY.Name(self._request.merge_strategy).lower())
 
         if self._request.in_dataset_ids:
             command += " --src-revs '{}'".format(

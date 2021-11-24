@@ -122,7 +122,6 @@ class TaskTrainingInvoker(TaskBaseInvoker):
             training_image=training_image,
             executor_name=request.executor_name
         )
-        print(f'request.executor_name {request.executor_name}')
         return train_response
 
     @classmethod

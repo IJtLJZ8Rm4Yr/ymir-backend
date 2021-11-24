@@ -13,7 +13,6 @@ class TaskImportingInvoker(TaskBaseInvoker):
     def task_invoke(cls, sandbox_root: str, repo_root: str, assets_config: Dict[str, str], working_dir: str,
                     task_monitor_file: str, request: backend_pb2.GeneralReq) -> backend_pb2.GeneralResp:
         importing_request = request.req_create_task.importing
-        name_strategy_ignore = importing_request.name_strategy_ignore if importing_request.name_strategy_ignore else False
 
         # Prepare media index-file
         media_dir, anno_dir = importing_request.asset_dir, importing_request.annotation_dir
@@ -35,7 +34,7 @@ class TaskImportingInvoker(TaskBaseInvoker):
                                                annotation_dir=anno_dir,
                                                media_location=media_location,
                                                work_dir=working_dir,
-                                               name_strategy_ignore=name_strategy_ignore)
+                                               name_strategy_ignore=importing_request.name_strategy_ignore)
 
         return importing_response
 
