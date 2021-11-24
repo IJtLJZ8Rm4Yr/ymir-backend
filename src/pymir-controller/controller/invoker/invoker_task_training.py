@@ -87,6 +87,10 @@ class TaskTrainingInvoker(TaskBaseInvoker):
             for dataset_type in train_request.in_dataset_types
         ]
 
+        executor_name = request.executor_name
+        if executor_name != request.task_id:
+            raise ValueError(f'executor_name:{executor_name} != task_id {request.task_id}')
+
         merge_response = invoker_call.make_invoker_cmd_call(
             invoker=MergeInvoker,
             sandbox_root=sandbox_root,
@@ -120,7 +124,7 @@ class TaskTrainingInvoker(TaskBaseInvoker):
             his_rev=sub_task_id_1,
             in_src_revs=request.task_id,
             training_image=training_image,
-            executor_name=request.executor_name
+            executor_name=executor_name
         )
         return train_response
 
