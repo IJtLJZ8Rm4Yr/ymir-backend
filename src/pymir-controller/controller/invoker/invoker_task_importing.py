@@ -13,7 +13,6 @@ class TaskImportingInvoker(TaskBaseInvoker):
     def task_invoke(cls, sandbox_root: str, repo_root: str, assets_config: Dict[str, str], working_dir: str,
                     task_monitor_file: str, request: backend_pb2.GeneralReq) -> backend_pb2.GeneralResp:
         importing_request = request.req_create_task.importing
-        name_strategy_ignore = importing_request.name_strategy_ignore if importing_request.name_strategy_ignore else False
 
         # Prepare media index-file
         media_dir, anno_dir = importing_request.asset_dir, importing_request.annotation_dir
@@ -22,7 +21,7 @@ class TaskImportingInvoker(TaskBaseInvoker):
             logging.error(error_str)
             return utils.make_general_response(code.ResCode.CTR_INVALID_SERVICE_REQ, error_str)
 
-        media_files = [os.path.join(media_dir, f) for f in os.listdir(media_dir) if f.endswith('.jpg')]
+        media_files = [os.path.join(media_dir, f) for f in os.listdir(media_dir) if os.path.isfile(os.path.join(media_dir, f))]
         index_file = os.path.join(working_dir, 'index.txt')
         with open(index_file, 'w') as f:
             f.write('\n'.join(media_files))
@@ -35,7 +34,7 @@ class TaskImportingInvoker(TaskBaseInvoker):
                                                annotation_dir=anno_dir,
                                                media_location=media_location,
                                                work_dir=working_dir,
-                                               name_strategy_ignore=name_strategy_ignore)
+                                               name_strategy_ignore=importing_request.name_strategy_ignore)
 
         return importing_response
 

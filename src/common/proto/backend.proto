@@ -57,6 +57,11 @@ enum MirStorage {
     MIR_TASKS = 3;
 }
 
+enum MERGE_STRATEGY {
+    STOP = 0;
+    HOST = 1;
+}
+
 enum RequestType {
     UNKNOWN = 0;
     // CMD task
@@ -115,7 +120,7 @@ message GeneralReq {
     repeated string private_labels = 17;
     bool check_only=18;
     string executor_name = 19;
-    string merge_strategy = 20;
+    MERGE_STRATEGY merge_strategy = 20;
     ReqCreateTask req_create_task = 1001;
     ReqGetTaskInfo req_get_task_info = 1002;
 }
@@ -193,6 +198,7 @@ message TaskReqCopyData {
     string src_user_id = 1;
     string src_repo_id = 2;
     string src_dataset_id = 3;
+    bool name_strategy_ignore = 4;
 }
 
 message TaskReqLabeling {

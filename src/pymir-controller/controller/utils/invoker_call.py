@@ -21,7 +21,7 @@ def make_cmd_request(user_id: str = None,
                      force: bool = None,
                      commit_message: str = None,
                      executor_name: str = None,
-                     merge_strategy: str = None,
+                     merge_strategy: int = None,
                      req_create_task: backend_pb2.ReqCreateTask = None,
                      task_info_req: backend_pb2.ReqGetTaskInfo = None) -> backend_pb2.GeneralReq:
     request = backend_pb2.GeneralReq()
@@ -90,7 +90,7 @@ def make_invoker_cmd_call(invoker: Any,
                           req_create_task: backend_pb2.ReqCreateTask = None,
                           task_info_req: backend_pb2.ReqGetTaskInfo = None,
                           async_mode: bool = False,
-                          merge_strategy: str = None) -> backend_pb2.GeneralReq:
+                          merge_strategy: int = None) -> backend_pb2.GeneralReq:
     request = make_cmd_request(req_type=req_type,
                                user_id=user_id,
                                repo_id=repo_id,

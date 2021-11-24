@@ -39,6 +39,10 @@ class TaskMiningInvoker(TaskBaseInvoker):
         if not mining_request.in_dataset_ids:
             return utils.make_general_response(code.ResCode.CTR_INVALID_SERVICE_REQ, "invalid_data_ids")
 
+        executor_name = request.executor_name
+        if executor_name != request.task_id:
+            raise ValueError(f'executor_name:{executor_name} != task_id {request.task_id}')
+
         sub_task_id_1 = utils.sub_task_id(request.task_id, 1)
         merge_response = invoker_call.make_invoker_cmd_call(
             invoker=MergeInvoker,
@@ -74,7 +78,7 @@ class TaskMiningInvoker(TaskBaseInvoker):
                                          his_rev=sub_task_id_1,
                                          in_src_revs=request.task_id,
                                          executor=mining_image,
-                                         executor_name=request.executor_name)
+                                         executor_name=executor_name)
 
         return mining_response
 

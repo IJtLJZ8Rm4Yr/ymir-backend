@@ -88,7 +88,7 @@ class TestInvokerTaskFilter(unittest.TestCase):
                                          repo_id=self._mir_repo_name,
                                          task_id=self._task_id,
                                          req_create_task=req_create_task,
-                                         merge_strategy='host')
+                                         merge_strategy=backend_pb2.MERGE_STRATEGY.Value('HOST'))
         print(MessageToDict(response))
 
         expected_cmd_merge = ("cd {0} && mir merge --dst-rev {1}@{2} -s host "
