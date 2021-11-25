@@ -7,9 +7,9 @@ from controller.label_model.label_studio import LabelStudio
 
 
 class FinishLabelTaskInvoker(BaseMirControllerInvoker):
-    def get_project_id_by_task_id(self, task_id):
+    def get_project_id_by_task_id(self, task_id: str) -> int:
         content = rds.hget(config.MONITOR_MAPPING_KEY, task_id)
-        return content["project_id"]
+        return content["project_id"]  # type: ignore
 
     def pre_invoke(self) -> backend_pb2.GeneralResp:
         return checker.check_request(request=self._request, prerequisites=[checker.Prerequisites.CHECK_USER_ID],)
