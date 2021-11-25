@@ -108,8 +108,8 @@ class TestInvokerTaskMining(unittest.TestCase):
                                          repo_id=self._mir_repo_name,
                                          task_id=self._task_id,
                                          req_create_task=req_create_task,
-                                         executor_name=self._task_id,
-                                         merge_strategy=backend_pb2.MERGE_STRATEGY.Value('HOST'))
+                                         executor_instance=self._task_id,
+                                         merge_strategy=backend_pb2.MergeStrategy.Value('HOST'))
         print(MessageToDict(response))
 
         expected_cmd_merge = ("cd {0} && mir merge --dst-rev {1}@{2} -s host "
@@ -129,7 +129,7 @@ class TestInvokerTaskMining(unittest.TestCase):
         mining_cmd = (
             "cd {0} && mir mining --dst-rev {1}@{1} -w {2} --model-location {3} --media-location {3} "
             "--topk {4} --model-hash {5} --src-revs {1}@{6} --cache {9} --config-file {7} --executor {8} "
-            "--executor-name {10}".format(
+            "--executor-instance {10}".format(
                 self._mir_repo_root, self._task_id, working_dir, self._storage_root, top_k, model_hash,
                 self._sub_task_id, output_config, assets_config['mining_image'], asset_cache_dir, self._task_id))
         mock_run.assert_has_calls(calls=[

@@ -57,7 +57,7 @@ enum MirStorage {
     MIR_TASKS = 3;
 }
 
-enum MERGE_STRATEGY {
+enum MergeStrategy {
     STOP = 0;
     HOST = 1;
 }
@@ -120,8 +120,8 @@ message GeneralReq {
     string model_config = 16;
     repeated string private_labels = 17;
     bool check_only=18;
-    string executor_name = 19;
-    MERGE_STRATEGY merge_strategy = 20;
+    string executor_instance = 19;
+    MergeStrategy merge_strategy = 20;
     ReqCreateTask req_create_task = 1001;
     ReqGetTaskInfo req_get_task_info = 1002;
 }
