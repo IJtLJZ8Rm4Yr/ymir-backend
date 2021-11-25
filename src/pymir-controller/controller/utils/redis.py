@@ -18,7 +18,7 @@ class MiddlewareRedis:
         try:
             res = self._client.hget(name, key)
             return json.loads(str(res))
-        except Exception as e:
+        except json.JSONDecodeError as e:
             logger.error(f"{e}")
             return None
 
