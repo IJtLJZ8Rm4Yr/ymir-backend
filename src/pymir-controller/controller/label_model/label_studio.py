@@ -129,7 +129,7 @@ class LabelStudio(LabelBase):
 
         return percent
 
-    def get_project_info(self, project_id: int):
+    def get_project_info(self, project_id: int) -> Dict:
         url_path = f"/api/projects/{project_id}"
         resp = self.requests.get(url_path)
         return json.loads(resp)
@@ -150,7 +150,7 @@ class LabelStudio(LabelBase):
 
         return unlabeled_task_ids
 
-    def delete_unlabeled_task(self, project_id: int):
+    def delete_unlabeled_task(self, project_id: int) -> None:
         project_info = self.get_project_info(project_id)
         unlabeled_task_ids = self.get_unlabeled_task(project_info["task_number"], project_id)
 
