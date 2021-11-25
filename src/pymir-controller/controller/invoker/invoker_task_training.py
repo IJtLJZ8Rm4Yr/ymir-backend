@@ -87,9 +87,9 @@ class TaskTrainingInvoker(TaskBaseInvoker):
             for dataset_type in train_request.in_dataset_types
         ]
 
-        executor_name = request.executor_name
-        if executor_name != request.task_id:
-            raise ValueError(f'executor_name:{executor_name} != task_id {request.task_id}')
+        executor_instance = request.executor_instance
+        if executor_instance != request.task_id:
+            raise ValueError(f'executor_instance:{executor_instance} != task_id {request.task_id}')
 
         merge_response = invoker_call.make_invoker_cmd_call(
             invoker=MergeInvoker,
@@ -124,7 +124,7 @@ class TaskTrainingInvoker(TaskBaseInvoker):
             his_rev=sub_task_id_1,
             in_src_revs=request.task_id,
             training_image=training_image,
-            executor_name=executor_name
+            executor_instance=executor_instance
         )
         return train_response
 
@@ -140,12 +140,12 @@ class TaskTrainingInvoker(TaskBaseInvoker):
         his_rev: str,
         in_src_revs: str,
         training_image: str,
-        executor_name: str,
+        executor_instance: str,
     ) -> backend_pb2.GeneralResp:
         training_cmd = (f"cd {repo_root} && {utils.mir_executable()} train --dst-rev {task_id}@{task_id} "
                         f"--model-location {models_upload_location} --media-location {media_location} -w {work_dir} "
                         f"--src-revs {in_src_revs}@{his_rev} --config-file {config_file} --executor {training_image} "
-                        f"--executor-name {executor_name}")
+                        f"--executor-instance {executor_instance}")
         return utils.run_command(training_cmd)
 
     def _repr(self) -> str:

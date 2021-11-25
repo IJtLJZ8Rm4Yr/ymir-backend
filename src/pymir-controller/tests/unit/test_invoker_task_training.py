@@ -126,7 +126,7 @@ class TestInvokerTaskTraining(unittest.TestCase):
                                          repo_id=self._mir_repo_name,
                                          task_id=self._task_id,
                                          req_create_task=req_create_task,
-                                         executor_name=self._task_id,
+                                         executor_instance=self._task_id,
                                          merge_strategy=backend_pb2.MergeStrategy.Value('HOST'))
         print(MessageToDict(response))
 
@@ -148,7 +148,7 @@ class TestInvokerTaskTraining(unittest.TestCase):
 
         training_cmd = ("cd {0} && mir train --dst-rev {1}@{1} --model-location {2} "
                         "--media-location {2} -w {3} --src-revs {1}@{4} --config-file {5} --executor {6} "
-                        "--executor-name {7}".format(
+                        "--executor-instance {7}".format(
                             self._mir_repo_root, self._task_id, self._storage_root, working_dir, self._sub_task_id,
                             output_config, training_image, self._task_id))
         mock_run.assert_has_calls(calls=[

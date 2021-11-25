@@ -11,9 +11,9 @@ class KillCMDInvoker(BaseMirControllerInvoker):
         if self._request.req_type != backend_pb2.CMD_KILL:
             raise RuntimeError("Mismatched req_type")
 
-        command = f"docker rm -f {self._request.executor_name}"
+        command = f"docker rm -f {self._request.executor_instance}"
 
         return utils.run_command(command)
 
     def _repr(self) -> str:
-        return f"cmd_kill: user: {self._request.user_id}, kill executor_name: {self._request.executor_name}"
+        return f"cmd_kill: user: {self._request.user_id}, kill executor_instance: {self._request.executor_instance}"
