@@ -154,15 +154,15 @@ class LabelStudio(LabelBase):
         project_info = self.get_project_info(project_id)
         unlabeled_task_ids = self.get_unlabeled_task(project_info["task_number"], project_id)
 
+        url_path = "/api/dm/actions"
+        params = {"id": "delete_tasks", "project": project_id}
         json_data = {
             "ordering": [],
             "selectedItems": {"all": False, "included": unlabeled_task_ids},
             "filters": {"conjunction": "and", "items": []},
-            "project": "3",
+            "project": str(project_id),
         }
 
-        url_path = "/api/dm/actions"
-        params = {"id": "delete_tasks", "project": 3}
         self.requests.post(url_path=url_path, params=params, json_data=json_data)
 
     @classmethod
@@ -188,25 +188,13 @@ class LabelStudio(LabelBase):
         logger.info(f"success convert_annotation_to_ymir: {des_path}")
 
     @catch_label_task_error
-    def run(
-        self,
-        task_id: str,
-        project_name: str,
-        keywords: List,
-        collaborators: List,
-        expert_instruction: str,
-        asset_dir: str,
-        export_path: str,
-        monitor_file_path: str,
-        repo_root: str,
-        media_location: str,
-        import_work_dir: str,
-    ) -> None:
+    def run(self, task_id: str, project_name: str, keywords: List, collaborators: List, expert_instruction: str,
+            asset_dir: str, export_path: str, monitor_file_path: str, repo_root: str,
+            media_location: str, import_work_dir: str) -> None:
         logger.info("start LabelStudio run()")
         project_id = self.create_label_project(project_name, keywords, collaborators, expert_instruction)
         storage_id = self.set_import_storage(project_id, asset_dir)
         self.set_export_storage(project_id, export_path)
         self.sync_import_storage(storage_id)
-        self.store_label_task_mapping(
-            project_id, task_id, monitor_file_path, export_path, repo_root, media_location, import_work_dir
-        )
+        self.store_label_task_mapping(project_id, task_id, monitor_file_path, export_path, repo_root,
+                                      media_location, import_work_dir)
