@@ -127,7 +127,7 @@ class TestInvokerTaskTraining(unittest.TestCase):
                                          task_id=self._task_id,
                                          req_create_task=req_create_task,
                                          executor_name=self._task_id,
-                                         merge_strategy=backend_pb2.MERGE_STRATEGY.Value('HOST'))
+                                         merge_strategy=backend_pb2.MergeStrategy.Value('HOST'))
         print(MessageToDict(response))
 
         expected_cmd_merge = ("cd {0} && mir merge --dst-rev {1}@{2} -s host "

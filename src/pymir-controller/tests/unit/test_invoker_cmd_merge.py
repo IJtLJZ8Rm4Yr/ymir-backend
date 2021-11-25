@@ -81,7 +81,7 @@ class TestInvokerMerge(unittest.TestCase):
                                          dst_task_id=self._dst_task_id,
                                          in_dataset_ids=[self._guest_id1, self._guest_id2],
                                          ex_dataset_ids=[self._guest_id3],
-                                         merge_strategy=backend_pb2.MERGE_STRATEGY.Value('HOST'))
+                                         merge_strategy=backend_pb2.MergeStrategy.Value('HOST'))
         print(MessageToDict(response))
 
         expected_cmd = ("cd {0} && mir merge --dst-rev {1}@{2} -s host "
