@@ -77,7 +77,7 @@ class TestInvokerTaskTraining(unittest.TestCase):
         rds.zrange = mock.Mock(return_value=['0', '2'])
         rds.zadd = mock.Mock()
         rds.zremrangebyscore = mock.Mock()
-        gpu_utils.get_gpus_info = mock.Mock(return_value={'0': 0.99, '1': 0.9, '2': 0.89})
+        gpu_utils.GPUInfo.get_gpus_info = mock.Mock(return_value={'0': 0.99, '1': 0.9, '2': 0.89})
 
         LabelFileHandler.get_main_labels_by_ids = mock.Mock(return_value=["frisbee", "car"])
 
