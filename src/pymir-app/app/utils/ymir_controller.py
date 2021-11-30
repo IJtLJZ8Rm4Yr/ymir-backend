@@ -13,6 +13,7 @@ from fastapi.logger import logger
 
 from app.models.task import TaskType, Task
 from app.schemas.dataset import ImportStrategy
+from app.schemas.task import MergeStrategy
 from id_definition.task_id import TaskId
 from app.utils.files import purge_contents_of_a_dir
 
@@ -40,6 +41,7 @@ class ControllerRequest:
     user_id: Union[str, int]
     repo_id: Optional[str] = None
     task_id: Optional[str] = None
+    merge_strategy: Optional[MergeStrategy] = None
     args: Optional[Dict] = None
     req: Optional[mirsvrpb.GeneralReq] = None
 
@@ -50,11 +52,14 @@ class ControllerRequest:
             self.repo_id = f"{self.user_id:0>6}"
         if self.task_id is None:
             self.task_id = self.gen_task_id(self.user_id)
+
+        merge_strategy = mirsvrpb.STOP if self.merge_strategy is MergeStrategy.stop_upon_conflict else mirsvrpb.HOST
         request = mirsvrpb.GeneralReq(
             user_id=self.user_id,
             repo_id=self.repo_id,
             task_id=self.task_id,
             executor_instance=self.task_id,
+            merge_strategy=merge_strategy,
         )
 
         method_name = "prepare_" + self.type.name
