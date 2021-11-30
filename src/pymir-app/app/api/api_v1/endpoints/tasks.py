@@ -104,8 +104,17 @@ def create_task(
     if parameters and task_in.config:
         parameters["config"] = task_in.config
 
+    if parameters and parameters.get("strategy"):
+        merge_strategy = parameters["strategy"]
+    else:
+        merge_strategy = None
+
     req = ControllerRequest(
-        task_in.type, current_user.id, current_workspace.hash, args=parameters
+        task_in.type,
+        current_user.id,
+        current_workspace.hash,
+        merge_strategy=merge_strategy,
+        args=parameters
     )
     try:
         resp = controller_client.send(req)
@@ -146,7 +155,8 @@ def normalize_parameters(
             continue
         if k.endswith("datasets"):
             datasets = crud.dataset.get_multi_by_ids(db, ids=v)
-            order_datasets_by_strategy(datasets, parameters.strategy)
+            if parameters.strategy:
+                order_datasets_by_strategy(datasets, parameters.strategy)
             normalized[k] = [dataset.hash for dataset in datasets]  # type: ignore
         elif k.endswith("classes"):
             normalized[k] = [keyword_name_to_id[keyword.strip()] for keyword in v]  # type: ignore
