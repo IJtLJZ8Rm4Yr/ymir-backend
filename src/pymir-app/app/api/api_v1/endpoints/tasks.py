@@ -146,7 +146,7 @@ def normalize_parameters(
             continue
         if k.endswith("datasets"):
             datasets = crud.dataset.get_multi_by_ids(db, ids=v)
-            # order_datasets_by_strategy(datasets, parameters.strategy)
+            order_datasets_by_strategy(datasets, parameters.strategy)
             normalized[k] = [dataset.hash for dataset in datasets]  # type: ignore
         elif k.endswith("classes"):
             normalized[k] = [keyword_name_to_id[keyword.strip()] for keyword in v]  # type: ignore
