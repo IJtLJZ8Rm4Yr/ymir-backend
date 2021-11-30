@@ -83,9 +83,8 @@ def import_model(
         raise InvalidConfiguration()
 
     model_info = jsonable_encoder(model_import)
-    user_id = model_info.get("user_id") or current_user.id
 
-    task = create_task_as_placeholder(db, user_id=user_id)
+    task = create_task_as_placeholder(db, user_id=current_user.id)
     logger.info("[import model] task created and hided: %s", task)
 
     existing_model_hash = crud.model.get_by_hash(
@@ -94,6 +93,7 @@ def import_model(
 
     # bind imported model to the placeholding task
     model_info["task_id"] = task.id
+    model_info["user_id"] = current_user.id
     model_in = schemas.ModelCreate(**model_info)
     model = crud.model.create(db, obj_in=model_in)
     logger.info("[import model] model record created: %s", model)
