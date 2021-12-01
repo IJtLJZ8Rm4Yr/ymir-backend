@@ -27,6 +27,13 @@ class ExtraRequestType(enum.IntEnum):
     kill = 500
 
 
+MERGE_STRATEGY_MAPPING = {
+    MergeStrategy.stop_upon_conflict: mirsvrpb.STOP,
+    MergeStrategy.prefer_newest: mirsvrpb.HOST,
+    MergeStrategy.prefer_oldest: mirsvrpb.HOST,
+}
+
+
 def gen_typed_datasets(dataset_type: int, datasets: List[str]) -> Generator:
     for dataset_id in datasets:
         dataset_with_type = mirsvrpb.TaskReqTraining.TrainingDatasetType()
@@ -41,7 +48,6 @@ class ControllerRequest:
     user_id: Union[str, int]
     repo_id: Optional[str] = None
     task_id: Optional[str] = None
-    merge_strategy: Optional[MergeStrategy] = None
     args: Optional[Dict] = None
     req: Optional[mirsvrpb.GeneralReq] = None
 
@@ -53,13 +59,11 @@ class ControllerRequest:
         if self.task_id is None:
             self.task_id = self.gen_task_id(self.user_id)
 
-        merge_strategy = mirsvrpb.STOP if self.merge_strategy is MergeStrategy.stop_upon_conflict else mirsvrpb.HOST
         request = mirsvrpb.GeneralReq(
             user_id=self.user_id,
             repo_id=self.repo_id,
             task_id=self.task_id,
             executor_instance=self.task_id,
-            merge_strategy=merge_strategy,
         )
 
         method_name = "prepare_" + self.type.name
@@ -103,6 +107,7 @@ class ControllerRequest:
         req_create_task.filter.CopyFrom(filter_request)
 
         request.req_type = mirsvrpb.TASK_CREATE
+        request.merge_strategy = MERGE_STRATEGY_MAPPING[args["merge_strategy"]]
         request.req_create_task.CopyFrom(req_create_task)
         return request
 
@@ -134,6 +139,7 @@ class ControllerRequest:
         req_create_task.training.CopyFrom(train_task_req)
 
         request.req_type = mirsvrpb.TASK_CREATE
+        request.merge_strategy = MERGE_STRATEGY_MAPPING[args["merge_strategy"]]
         request.req_create_task.CopyFrom(req_create_task)
         return request
 
@@ -157,6 +163,7 @@ class ControllerRequest:
         req_create_task.mining.CopyFrom(mine_task_req)
 
         request.req_type = mirsvrpb.TASK_CREATE
+        request.merge_strategy = MERGE_STRATEGY_MAPPING[args["merge_strategy"]]
         request.req_create_task.CopyFrom(req_create_task)
         return request
 
@@ -289,6 +296,17 @@ class ControllerClient:
         resp = self.send(req)
         logger.info("[controller] get labels response: %s", resp)
         return list(resp["csv_labels"])
+
+    def create_task(
+        self,
+        user_id: int,
+        workspace_id: Optional[str],
+        task_id: str,
+        task_type: TaskType,
+        task_parameters: Optional[Dict],
+    ) -> Dict:
+        req = ControllerRequest(task_type, user_id, workspace_id, args=task_parameters,)
+        return self.send(req)
 
     def terminate_task(self, user_id: int, target_task: Task) -> Dict:
         req = ControllerRequest(
