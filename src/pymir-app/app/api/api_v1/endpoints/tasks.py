@@ -148,7 +148,7 @@ def normalize_parameters(
     if not parameters:
         return None
     p = dict(parameters)
-    normalized = {}
+    normalized = {}  # type: Dict[str, Any]
     normalized["name"] = name
     for k, v in p.items():
         if v is None:
@@ -157,13 +157,13 @@ def normalize_parameters(
             datasets = crud.dataset.get_multi_by_ids(db, ids=v)
             if parameters.strategy:
                 order_datasets_by_strategy(datasets, parameters.strategy)
-            normalized[k] = [dataset.hash for dataset in datasets]  # type: ignore
+            normalized[k] = [dataset.hash for dataset in datasets]
         elif k.endswith("classes"):
-            normalized[k] = [keyword_name_to_id[keyword.strip()] for keyword in v]  # type: ignore
+            normalized[k] = [keyword_name_to_id[keyword.strip()] for keyword in v]
         elif k == "model_id":
             model = crud.model.get(db, id=v)
             assert model and model.hash
-            normalized["model_hash"] = model.hash  # type: ignore
+            normalized["model_hash"] = model.hash
         else:
             normalized[k] = v
     return normalized
