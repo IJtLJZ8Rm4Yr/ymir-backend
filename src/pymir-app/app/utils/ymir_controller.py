@@ -305,7 +305,7 @@ class ControllerClient:
         task_type: TaskType,
         task_parameters: Optional[Dict],
     ) -> Dict:
-        req = ControllerRequest(task_type, user_id, workspace_id, args=task_parameters)
+        req = ControllerRequest(task_type, user_id, workspace_id, task_id, args=task_parameters)
         return self.send(req)
 
     def terminate_task(self, user_id: int, target_task: Task) -> Dict:
