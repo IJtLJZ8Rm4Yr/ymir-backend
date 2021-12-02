@@ -461,9 +461,11 @@ class TaskResultProxy:
 
     def handle_failed_import_task(self, task: schemas.Task, task_result: Dict) -> None:
         # makeup data for failed dataset
+        error_message = task_result.get("state_message")
+        ignored_keywords = list(json.loads(error_message).keys()) if error_message else []
         dataset_info = {
             "keywords": [],
-            "ignored_keywords": json.loads(task_result["state_message"]),
+            "ignored_keywords": ignored_keywords,
             "items": 0,
             "total": 0,
         }
