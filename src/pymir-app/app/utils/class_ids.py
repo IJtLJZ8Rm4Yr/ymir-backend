@@ -16,7 +16,7 @@ def keywords_to_labels(keywords: List[Keyword]) -> Iterator[str]:
     label: dog,puppy,pup,canine
     """
     for keyword in keywords:
-        label = list(keyword.aliases) or []
+        label = list(keyword.aliases or [])
         label.insert(0, keyword.name)  # primary_name, followed by aliases
         yield ",".join(label)
 
