@@ -48,8 +48,7 @@ def extract_names_from_labels(labels: List[str]) -> Iterator[str]:
 
 def find_duplication_in_labels(labels: List[str], new_labels: List[str]) -> List[str]:
     names = set(extract_names_from_labels(labels))
-    new_names = set(extract_names_from_labels(new_labels))
-
+    new_names = set(new_labels)
     return list(names & new_names)
 
 
