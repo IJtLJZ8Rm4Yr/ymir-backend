@@ -69,10 +69,8 @@ def create_keywords(
     logger.info("old labels: %s\nnew labels: %s", labels, new_labels)
 
     dups = find_duplication_in_labels(labels, new_labels)
-    if keywords_input.dry_run:
+    if dups:
         return {"result": {"failed": dups}}
-    if (not keywords_input.dry_run) and dups:
-        raise DuplicateKeywordError()
 
     req = ControllerRequest(
         ExtraRequestType.add_label,
